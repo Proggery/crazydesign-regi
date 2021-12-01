@@ -1,0 +1,37 @@
+@import "../../config/config";
+
+.contact {
+  min-height: auto;
+  
+  form {
+    margin: 1rem auto;
+    max-width: 70rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+
+    .box {
+      padding: 1rem 1.5rem;
+      width: 100%;
+      background: none;
+      font-size: 1.6rem;
+      text-transform: none;
+      margin: 0.7rem 0;
+      box-shadow: var(--box-shadow);
+      border-radius: 0.5rem;
+
+      &:focus {
+        box-shadow: var(--box-shadow-inset);
+      }
+
+      &::placeholder {
+        color: var(--black);
+      }
+    }
+
+    textarea {
+      height: 20rem;
+      resize: none;
+    }
+  }
+}

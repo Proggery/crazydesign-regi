@@ -1,0 +1,31 @@
+@import "../../config/config";
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background: var(--bg-color);
+  width: 30rem;
+  border-right: var(--border);
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+
+  @include media-max(lg) {
+    left: -110%;
+    width: 34%;
+
+    &.active {
+      left: 0%;
+      transition: 0.4s linear;
+    }
+  }
+
+  @include media-max(xs) {
+    width: 100%;
+    border-right: 0;
+  }
+}

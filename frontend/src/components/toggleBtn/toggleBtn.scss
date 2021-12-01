@@ -1,0 +1,65 @@
+@import "../../config/config";
+
+#toggle__btn {
+  display: none;
+
+  @include media-max(lg) {
+    position: fixed;
+    top: 1.5rem;
+    left: 2rem;
+    z-index: 1000;
+    height: 5rem;
+    width: 5rem;
+    line-height: 5rem;
+    border-radius: 50%;
+    font-size: 2rem;
+    cursor: pointer;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--bg-color);
+
+    .toggle__line {
+      background: var(--black);
+      width: 50%;
+      height: 4px;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+
+      &:not(:first-child) {
+        margin-top: 3px;
+      }
+    }
+
+    &:hover {
+      box-shadow: var(--box-shadow-inset);
+    }
+    &.active {
+      .toggle__line__frame {
+        transform: rotate(360deg);
+        transition: 1s;
+  
+        .toggle__line {
+          position: relative;
+  
+          &:nth-child(1) {
+            transform: rotate(-45deg);
+            top: 7px;
+            left: 11px;
+          }
+          &:nth-child(2) {
+            opacity: 0;
+          }
+          &:nth-child(3) {
+            transform: rotate(45deg);
+            top: -7px;
+            left: 11px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,130 @@
+/* ****** HELP ****** */
+.piros {
+  border: 1px solid red;
+}
+
+.sarga {
+  border: 1px solid yellow;
+}
+
+.fekete {
+  border: 1px solid black;
+}
+
+.zold {
+  border: 1px solid green;
+}
+
+.feher {
+  border: 1px solid white;
+}
+
+/* ****** HELP END ****** */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0px;
+  padding: 0;
+  line-height: normal;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+input {
+  outline: none;
+}
+
+input, select {
+  font-size: 100%;
+}
+
+/*** iPhone and iOS Form Input Zoom Fixes ***/
+/* Fix Input Zoom on devices older than iPhone 5: */
+@media screen and (device-aspect-ratio: 2 / 3) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="url"] {
+    font-size: 16px;
+  }
+}
+
+/* Fix Input Zoom on iPhone 5, 5C, 5S, iPod Touch 5g */
+@media screen and (device-aspect-ratio: 40 / 71) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="url"] {
+    font-size: 16px;
+  }
+}
+
+/* Fix Input Zoom on iPhone 6, iPhone 6s, iPhone 7  */
+@media screen and (device-aspect-ratio: 375 / 667) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="tel"], input[type="url"] {
+    font-size: 16px;
+  }
+}
+
+/* Fix Input Zoom on iPhone 6 Plus, iPhone 6s Plus, iPhone 7 Plus, iPhone 8, iPhone X, XS, XS Max  */
+@media screen and (device-aspect-ratio: 9 / 16) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="tel"], input[type="url"] {
+    font-size: 16px;
+  }
+}
+
+.sidebar__profile img {
+  margin: 5rem 0 3rem;
+  border: 1rem solid transparent;
+  border-radius: 50%;
+  height: 18rem;
+  width: 18rem;
+  box-shadow: var(--box-shadow);
+  object-fit: cover;
+  object-position: -.3rem -.3rem;
+  filter: grayscale(100%);
+}
+
+.sidebar__profile h3 {
+  color: var(--black);
+  font-size: 3rem;
+  font-weight: 300;
+}
+
+.sidebar__profile p {
+  color: var(--orange);
+  font-size: 1.5rem;
+  margin-top: 0.6rem;
+}
+/*# sourceMappingURL=sidebarProfile.css.map */

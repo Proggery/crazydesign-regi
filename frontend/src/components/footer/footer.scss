@@ -1,0 +1,14 @@
+@import "../../config/config";
+
+footer {
+  margin-top: 5rem;
+  font-size: 1.4rem;
+  text-align: center;
+  padding: 2.5rem 1rem;
+  border-top: var(--border);
+  color: var(--black);
+
+  span {
+    color: var(--orange);
+  }
+}

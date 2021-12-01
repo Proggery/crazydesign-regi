@@ -1,0 +1,18 @@
+@import "../../../config/config";
+
+.logo {
+    width: 70%;
+    margin: auto auto 0;
+
+    svg {
+        width: 100%;
+
+        path {
+            fill: var(--orange);
+        }
+    }
+
+    @include media-max(xs) {
+        width: 60%;
+    }
+}

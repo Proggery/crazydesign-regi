@@ -1,0 +1,23 @@
+.share {
+  position: relative;
+  top: 10rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--box-shadow);
+  padding: 1rem;
+
+  a {
+    height: 5rem;
+    width: 5rem;
+    line-height: 5rem;
+    box-shadow: var(--box-shadow);
+    margin: 0.5rem;
+    font-size: 2rem;
+    color: var(--black);
+    border-radius: 0.5rem;
+  }
+
+  a:hover {
+    box-shadow: var(--box-shadow-inset);
+    color: var(--orange);
+  }
+}

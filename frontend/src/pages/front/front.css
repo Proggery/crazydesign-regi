@@ -1,0 +1,214 @@
+/* ****** HELP ****** */
+.piros {
+  border: 1px solid red;
+}
+
+.sarga {
+  border: 1px solid yellow;
+}
+
+.fekete {
+  border: 1px solid black;
+}
+
+.zold {
+  border: 1px solid green;
+}
+
+.feher {
+  border: 1px solid white;
+}
+
+/* ****** HELP END ****** */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0px;
+  padding: 0;
+  line-height: normal;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+input {
+  outline: none;
+}
+
+input, select {
+  font-size: 100%;
+}
+
+/*** iPhone and iOS Form Input Zoom Fixes ***/
+/* Fix Input Zoom on devices older than iPhone 5: */
+@media screen and (device-aspect-ratio: 2 / 3) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="url"] {
+    font-size: 16px;
+  }
+}
+
+/* Fix Input Zoom on iPhone 5, 5C, 5S, iPod Touch 5g */
+@media screen and (device-aspect-ratio: 40 / 71) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="url"] {
+    font-size: 16px;
+  }
+}
+
+/* Fix Input Zoom on iPhone 6, iPhone 6s, iPhone 7  */
+@media screen and (device-aspect-ratio: 375 / 667) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="tel"], input[type="url"] {
+    font-size: 16px;
+  }
+}
+
+/* Fix Input Zoom on iPhone 6 Plus, iPhone 6s Plus, iPhone 7 Plus, iPhone 8, iPhone X, XS, XS Max  */
+@media screen and (device-aspect-ratio: 9 / 16) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="tel"], input[type="url"] {
+    font-size: 16px;
+  }
+}
+
+.frontpage__content {
+  width: 100%;
+  margin: auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-color);
+}
+
+.frontpage__content .frontpage__text {
+  margin: auto 0;
+}
+
+.frontpage__content .frontpage__text .frontpage__title {
+  font-size: 5rem;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--black);
+}
+
+@media (max-width: 991.98px) {
+  .frontpage__content .frontpage__text .frontpage__title {
+    font-size: 4rem;
+  }
+}
+
+.frontpage__content .frontpage__text .Typewriter__wrapper {
+  font-size: 7rem;
+  font-weight: 600;
+  color: var(--orange);
+}
+
+@media (max-width: 991.98px) {
+  .frontpage__content .frontpage__text .Typewriter__wrapper {
+    font-size: 5rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .frontpage__content .frontpage__text .Typewriter__wrapper {
+    font-size: 2.8rem;
+  }
+}
+
+.frontpage__content .frontpage__text .Typewriter__cursor {
+  font-size: 9rem;
+  font-weight: 100;
+  color: var(--orange);
+}
+
+@media (max-width: 991.98px) {
+  .frontpage__content .frontpage__text .Typewriter__cursor {
+    font-size: 6rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .frontpage__content .frontpage__text .Typewriter__cursor {
+    font-size: 4rem;
+  }
+}
+
+.frontpage__content .language {
+  position: relative;
+  border-radius: 0.5rem;
+  box-shadow: var(--box-shadow);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 300px;
+  width: 100%;
+  margin-bottom: 7rem;
+}
+
+@media (max-width: 1199.98px) {
+  .frontpage__content .language {
+    max-width: 230px;
+  }
+}
+
+.frontpage__content .language a {
+  height: 5rem;
+  width: 5rem;
+  line-height: 5rem;
+  box-shadow: var(--box-shadow);
+  margin: 0.5rem;
+  font-size: 2rem;
+  color: var(--black);
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+.frontpage__content .language a .frontpage__img {
+  width: 3.5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.frontpage__content .language a:hover {
+  box-shadow: var(--box-shadow-inset);
+  color: var(--orange);
+}
+/*# sourceMappingURL=front.css.map */

@@ -1,0 +1,27 @@
+@import "../../../config/config";
+
+.sidebar__profile {
+  img {
+    margin: 5rem 0 3rem;
+    border: 1rem solid transparent;
+    border-radius: 50%;
+    height: 18rem;
+    width: 18rem;
+    box-shadow: var(--box-shadow);
+    object-fit: cover;
+    object-position: -.3rem -.3rem;
+    filter: grayscale(100%);
+  }
+
+  h3 {
+    color: var(--black);
+    font-size: 3rem;
+    font-weight: 300;
+  }
+
+  p {
+    color: var(--orange);
+    font-size: 1.5rem;
+    margin-top: 0.6rem;
+  }
+}

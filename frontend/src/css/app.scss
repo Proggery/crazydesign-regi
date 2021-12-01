@@ -1,0 +1,109 @@
+@import "../config/config";
+
+// fonts
+$font-josefin: "Josefin Sans", sans-serif;
+
+// Home Colors
+$orange: #eb9d00;
+$black: #444;
+$light-color: #777;
+$bg-color: rgb(242, 242, 242);
+$border: 0.1rem solid rgba(0, 0, 0, 0.2);
+$box-shadow-light: 0.4rem 0.4rem 1rem #ccc, -0.4rem -0.4rem 1rem #fff;
+$box-shadow-inset-light: 0.4rem 0.4rem 1rem #ccc inset,
+  -0.4rem -0.4rem 1rem #fff inset;
+$box-shadow-dark: 0.4rem 0.4rem 1rem #333, -0.4rem -0.4rem 1rem #414141;
+$box-shadow-inset-dark: 0.4rem 0.4rem 1rem #333 inset,
+  -0.4rem -0.4rem 1rem #414141 inset;
+
+// Light theme
+:root {
+  --orange: #{$orange};
+  --black: #{$black};
+  --light-color: #{$light-color};
+  --bg-color: #{$bg-color};
+  --border: #{$border};
+  --box-shadow: #{$box-shadow-light};
+  --box-shadow-inset: #{$box-shadow-inset-light};
+}
+// Dark theme
+.dark-mode {
+  --orange: #{$orange};
+  --black: #{$bg-color};
+  --light-color: rgb(223, 223, 223);
+  --bg-color: #{$black};
+  --border: #{$border};
+  --box-shadow: #{$box-shadow-dark};
+  --box-shadow-inset: #{$box-shadow-inset-dark};
+}
+
+* {
+  font-family: $font-josefin;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  text-transform: capitalize;
+  transition: 0.2s linear;
+}
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  
+  body {
+    touch-action: pan-y;
+    padding-left: 0;
+
+    section {
+      min-height: 100vh;
+      padding: 2rem;
+
+      .heading {
+        text-align: center;
+        font-size: 5rem;
+        color: var(--black);
+        text-transform: lowercase;
+        padding-bottom: 2rem;
+
+        span {
+          color: var(--orange);
+          text-transform: lowercase;
+        }
+
+        @include media-max(lg) {
+          font-size: 4rem;
+        }
+        @include media-max(xs) {
+          font-size: 2.5rem;
+        }
+      }
+    }
+
+    .btn {
+      margin-top: 1rem;
+      display: inline-block;
+      padding: 1rem 3.5rem;
+      border-radius: 0.5rem;
+      font-size: 1.7rem;
+      cursor: pointer;
+      background: none;
+      color: var(--black);
+      box-shadow: var(--box-shadow);
+
+      &:hover {
+        box-shadow: var(--box-shadow-inset);
+        color: var(--orange);
+      }
+    }
+  }
+
+  @include media-max(lg) {
+    font-size: 55%;
+  }
+  @include media-max(xs) {
+    font-size: 50%;
+  }
+}
