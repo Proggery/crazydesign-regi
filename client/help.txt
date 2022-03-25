@@ -1,0 +1,11 @@
+--- NPM LETÖLTÉSEK ---
+- react-router-dom
+- react-scroll
+- externalLink
+
+
+--- KÉPEK ---
+// const imgPath = process.env.PUBLIC_URL;
+Az img tag-eket a react-ben mindig le kell zárni!
+
+A képeket a public könyvtárból így lehet meghívni ...src={process.env.PUBLIC_URL + "/img/icons/hu.svg"}

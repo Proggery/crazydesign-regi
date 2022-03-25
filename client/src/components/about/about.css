@@ -1,0 +1,184 @@
+/* ****** HELP ****** */
+.piros {
+  border: 1px solid red;
+}
+
+.sarga {
+  border: 1px solid yellow;
+}
+
+.fekete {
+  border: 1px solid black;
+}
+
+.zold {
+  border: 1px solid green;
+}
+
+.feher {
+  border: 1px solid white;
+}
+
+/* ****** HELP END ****** */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0px;
+  padding: 0;
+  line-height: normal;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+input {
+  outline: none;
+}
+
+input, select {
+  font-size: 100%;
+}
+
+/*** iPhone and iOS Form Input Zoom Fixes ***/
+/* Fix Input Zoom on devices older than iPhone 5: */
+@media screen and (device-aspect-ratio: 2 / 3) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="url"] {
+    font-size: 16px;
+  }
+}
+
+/* Fix Input Zoom on iPhone 5, 5C, 5S, iPod Touch 5g */
+@media screen and (device-aspect-ratio: 40 / 71) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="url"] {
+    font-size: 16px;
+  }
+}
+
+/* Fix Input Zoom on iPhone 6, iPhone 6s, iPhone 7  */
+@media screen and (device-aspect-ratio: 375 / 667) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="tel"], input[type="url"] {
+    font-size: 16px;
+  }
+}
+
+/* Fix Input Zoom on iPhone 6 Plus, iPhone 6s Plus, iPhone 7 Plus, iPhone 8, iPhone X, XS, XS Max  */
+@media screen and (device-aspect-ratio: 9 / 16) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="tel"], input[type="url"] {
+    font-size: 16px;
+  }
+}
+
+.about .row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap-reverse;
+  gap: 4rem;
+}
+
+.about .row .box-container {
+  flex: 1 1 40rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.about .row .box-container .box {
+  flex: 1 1 18rem;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--box-shadow);
+}
+
+.about .row .box-container .box h3 {
+  font-size: 5rem;
+  color: var(--black);
+  line-height: 1.1;
+}
+
+@media (max-width: 575.98px) {
+  .about .row .box-container .box h3 {
+    font-size: 3.5rem;
+  }
+}
+
+.about .row .box-container .box p {
+  font-size: 1.7rem;
+  color: var(--light-color);
+  padding: 0.5rem 0;
+}
+
+.about .row .content {
+  flex: 1 1 40rem;
+}
+
+.about .row .content h3 {
+  font-size: 3.5rem;
+  color: var(--black);
+  line-height: 1.8;
+}
+
+.about .row .content h3 span {
+  color: var(--orange);
+}
+
+@media (max-width: 991.98px) {
+  .about .row .content h3 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .about .row .content h3 {
+    font-size: 2.5rem;
+  }
+}
+
+.about .row .content p {
+  font-size: 1.7rem;
+  color: var(--light-color);
+  line-height: 1.8;
+  padding: 1rem 0;
+  text-transform: none;
+}
+
+.about .row:nth-child(3) {
+  padding-top: 2rem;
+}
+/*# sourceMappingURL=about.css.map */

@@ -1,0 +1,38 @@
+@import "../../config/config";
+
+.heading {
+  text-align: center;
+  font-size: 3.5rem;
+  padding-bottom: 2rem;
+  font-weight: bold;
+
+  .span_first {
+      &,* {
+          color: var(--orange);
+
+      }
+
+    h3 {
+      display: inline-block;
+
+      &.title::first-letter {
+        text-transform: capitalize;
+      }
+    }
+  }
+  .span_last {
+    color: var(--black);
+    text-transform: lowercase;
+
+    h3 {
+      display: inline-block;
+    }
+  }
+
+  @include media-max(lg) {
+    font-size: 4rem;
+  }
+  @include media-max(xs) {
+    font-size: 2.5rem;
+  }
+}
