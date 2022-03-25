@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "./home.css";
 
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { loadAllData } from "../../redux/reducers/datas/thunks";
+
 import Sidebar from "../../components/sidebar/Sidebar.jsx";
 import BlackAndWhite from "../../components/blackAndWhite/BlackAndWhite.jsx";
 import ToggleBtn from "../../components/toggleBtn/ToggleBtn.jsx";
@@ -18,16 +22,25 @@ export default function Home({ theme, darkMode }) {
     setSidebarActive(!sidebarActive);
   };
 
+  const dispatch = useDispatch();
+
+  const { isLoading, allData } = useSelector((state) => state.allData);
+
+  useEffect(() => {
+    dispatch(loadAllData());
+  }, [dispatch]);
+
   return (
     <div className={`home__frame ${darkMode ? "dark-mode" : ""}`}>
       <Sidebar
         sidebarActive={sidebarActive}
         setSidebarActive={setSidebarActive}
       />
-
       <ToggleBtn sidebarToggle={sidebarToggle} sidebarActive={sidebarActive} />
       <BlackAndWhite theme={theme} />
-
+      {allData && allData.map(data => (
+        data.title
+      ))}
       <Header />
       <About />
       <Skills />

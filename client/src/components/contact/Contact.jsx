@@ -17,7 +17,7 @@ export default function Contact() {
 
     const patterns = {
       nameValid: /^[A-záéíóőúű]{2,20}?$/,
-      emailValid: /^([a-z\d\.-]+)@([a-z\d-]{2,})\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
+      emailValid: /^([a-z\d-]+)@([a-z\d-]{2,})\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
       messageValid: /^[A-záéíóőúű,\d]{5,}$/,
     };
 
@@ -78,7 +78,7 @@ export default function Contact() {
   );
 }
 
-function sanitizeString(str) {
-  str = str.replace(/[^a-z0-9áéíóúñü \.,_-]/gim, "");
-  return str.trim();
-}
+// function sanitizeString(str) {
+//   str = str.replace(/[^a-z0-9áéíóúñü \.,_-]/gim, "");
+//   return str.trim();
+// }
