@@ -3,33 +3,41 @@ const app = express();
 const port = process.env.PORT || 5555;
 const mysql = require("mysql");
 const cors = require("cors");
+const bodyParser = require('body-parser')
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// const db = mysql.createConnection({
-//   host: "eu-cdbr-west-02.cleardb.net",
-//   user: "bc341521121ea1",
-//   password: "a6aee791",
-//   database: "heroku_704ed3bca8e4c07",
-// });
 
 const db = mysql.createConnection({
-  host: "localhost",
-  port: "8889",
-  user: "root",
-  password: "root",
-  database: "crazydesign",
+  host: "eu-cdbr-west-02.cleardb.net",
+  user: "b1cb66ffd9368e",
+  password: "822dff14",
+  database: "heroku_462665c36d4d83f",
+});
+
+app.use(cors())
+app.use(express.json());
+app.use(bodyParser());
+app.use(express.urlencoded({ extended: true }));
+
+app.get("/", (req, res) => {
+  const myQuery = "SELECT * FROM admin";
+
+  db.query(myQuery, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      if (result) {
+        res.status(200).send(result);
+      }
+    }
+  });
 });
 
 app.post("/create", (req, res) => {
-  const name = req.body.name;
-  const age = req.body.age;
+  const {title} = req.body;
 
-  const myQuery = "INSERT INTO about (name, age) VALUES (?,?)";
+  const myQuery = "INSERT INTO admin (title) VALUES (?)";
 
-  db.query(myQuery, [name, age], (err, result) => {
+  db.query(myQuery, [title], (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -38,20 +46,22 @@ app.post("/create", (req, res) => {
   });
 });
 
-app.get("/users", (req, res) => {
-  const myQuery = "SELECT * FROM about";
+app.put("/update/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  const { title } = req.body;
+
+  const myQuery = `  UPDATE admin SET title = '${title}' WHERE id=${id}`;
 
   db.query(myQuery, (err, result) => {
     if (err) {
       console.log(err);
-    } else {
-      res.status(200).send(result);
     }
+    res.status(200).send({ message: "felhasználó törölve" });
   });
 });
 
 app.get("/", (req, res) => {
-  res.status(200).send("Sikeres csatlakozás!");
-});
+  res.send("sikeres csatlakozás")
+})
 
 app.listen(port);

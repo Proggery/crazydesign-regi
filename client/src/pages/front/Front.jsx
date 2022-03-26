@@ -5,10 +5,10 @@ import BlackAndWhite from "../../components/blackAndWhite/BlackAndWhite.jsx";
 import TextWriter from "../../components/textWriter/TextWriter";
 import { HungarianIcon, DeutschIcon, EnglishIcon } from "../../config/images";
 
-function Front({ theme, darkMode }) {
+function Front({ backgroundTheme, darkMode }) {
   return (
     <div className={`frontpage__content ${darkMode ? "dark-mode" : ""}`}>
-      <BlackAndWhite theme={theme} />
+      <BlackAndWhite backgroundTheme={backgroundTheme} />
       <div className="frontpage__text">
         <div className="frontpage__title">CrazyDesign...</div>
         <TextWriter />

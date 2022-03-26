@@ -22,4 +22,36 @@
     color: var(--orange);
     box-shadow: var(--box-shadow-inset);
   }
+
+  .sun {
+    background: #eb9d00;
+    mask: url("../../img/icons/sun-svgrepo-com.svg") no-repeat;
+    width: 3rem;
+    height: 3rem;
+    transition: 1s;
+    animation: show 1s forwards;
+    opacity: 0;
+
+    @keyframes show {
+      to{
+        opacity: 1;
+      }
+    }
+  }
+  .moon {
+    background: #eb9d00;
+    mask: url("../../img/icons/moon-svgrepo-com.svg") no-repeat;
+    width: 2.2rem;
+    height: 2.2rem;
+    transition: 1s;
+    animation: show 1s forwards;
+    opacity: 0;
+    transform: rotate(20deg);
+
+    @keyframes show {
+      to{
+        opacity: 1;
+      }
+    }
+  }
 }

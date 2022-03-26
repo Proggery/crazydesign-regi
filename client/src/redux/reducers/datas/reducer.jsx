@@ -17,6 +17,12 @@ const reducer = (state = initialState, { type, payload }) => {
         isLoading: false,
         allData: payload,
       };
+    case actionType.CREATE_DATA:
+    case actionType.UPDATE_DATA:
+      return {
+        ...state,
+        isLoading: false,
+      };
 
     default:
       return state;
