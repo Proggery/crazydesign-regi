@@ -1,1 +1,6 @@
-/* No CSS *//*# sourceMappingURL=admin.css.map */
+.config__box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+/*# sourceMappingURL=admin.css.map */

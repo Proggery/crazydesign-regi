@@ -6,7 +6,7 @@
   padding: 1rem;
 }
 
-.share a {
+.share .share__icon {
   height: 4rem;
   width: 4rem;
   line-height: 4rem;
@@ -18,11 +18,11 @@
   cursor: pointer;
 }
 
-.share a::before {
+.share .share__icon::before {
   font-size: 2.5rem;
 }
 
-.share a:hover {
+.share .share__icon:hover {
   box-shadow: var(--box-shadow-inset);
   color: var(--orange);
 }

@@ -34,7 +34,7 @@ app.use(bodyParser());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/getHeader", async (req, res) => {
-  const myQuery = await "SELECT title, sub_title FROM header";
+  const myQuery = await "SELECT title, sub_title FROM header_config";
 
   db.query(myQuery, (err, result) => {
     if (err) {
@@ -47,7 +47,7 @@ app.get("/getHeader", async (req, res) => {
 app.post("/createHeader", (req, res) => {
   const { title, subTitle } = req.body;
 
-  const myQuery = `INSERT INTO header (title, sub_title) VALUES ('${title}','${subTitle}')`;
+  const myQuery = `INSERT INTO header_config (title, sub_title) VALUES ('${title}','${subTitle}')`;
 
   db.query(myQuery, (err, result) => {
     if (err) {
@@ -69,7 +69,7 @@ app.put("/updateHeader/:id", (req, res) => {
   }
 
   if (title && subTitle) {
-    const myQuery = `UPDATE header SET title = '${title}',  sub_title = '${subTitle}' WHERE id=${id}`;
+    const myQuery = `UPDATE header_config SET title = '${title}',  sub_title = '${subTitle}' WHERE id=${id}`;
 
     db.query(myQuery, (err, result) => {
       if (err) {
@@ -79,7 +79,7 @@ app.put("/updateHeader/:id", (req, res) => {
     });
   } else {
     if (title) {
-      const myQuery = `UPDATE header SET title = '${title}' WHERE id=${id}`;
+      const myQuery = `UPDATE header_config SET title = '${title}' WHERE id=${id}`;
 
       db.query(myQuery, (err, result) => {
         if (err) {
@@ -89,7 +89,7 @@ app.put("/updateHeader/:id", (req, res) => {
       });
     }
     if (subTitle) {
-      const myQuery = `UPDATE header SET sub_title = '${subTitle}' WHERE id=${id}`;
+      const myQuery = `UPDATE header_config SET sub_title = '${subTitle}' WHERE id=${id}`;
 
       db.query(myQuery, (err, result) => {
         if (err) {

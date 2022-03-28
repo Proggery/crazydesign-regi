@@ -61,10 +61,11 @@ const HeaderBox = () => {
   };
 
   const titleInputProps = {
-    label: "Név",
+    label: "Útvonal (URL)",
     name: "title",
     onChange: handleChange,
     variant: "standard",
+    placeholder: "pl.: https://facebook.com/",
   };
 
   const subTitleInputProps = {
@@ -93,23 +94,20 @@ const HeaderBox = () => {
       autoComplete="off"
     >
       {error}
-      <h2>Fejléc beállítás</h2>
-      {inputChange ? (
-        <div className="config__box">
-          <TextInput {...titleInputProps} />
-          <TextInput {...subTitleInputProps} />
-          <SendButton {...submitButtonProps} />
-        </div>
-      ) : (
-        allData &&
+      <h2>Social média beállítás</h2>
+
+      <div className="config__box">
+        <TextInput {...titleInputProps} />
+        <SendButton {...submitButtonProps} />
+      </div>
+
+      {allData &&
         allData.map((data, key) => (
           <div className="config__box" key={key}>
             <TextInput defaultValue={data.title} {...titleInputProps} />
-            <TextInput defaultValue={data.sub_title} {...subTitleInputProps} />
             <SendButton {...updateButtonProps} />
           </div>
-        ))
-      )}
+        ))}
     </Box>
   );
 };
