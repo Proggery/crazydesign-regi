@@ -1,67 +1,110 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 5555;
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const cors = require("cors");
-const bodyParser = require('body-parser')
+const bodyParser = require("body-parser");
+require("dotenv").config();
 
+// const db = mysql.createConnection({
+//   host: "eu-cdbr-west-02.cleardb.net",
+//   user: "b1cb66ffd9368e",
+//   password: "822dff14",
+//   database: "heroku_462665c36d4d83f",
+// });
 
 const db = mysql.createConnection({
-  host: "eu-cdbr-west-02.cleardb.net",
-  user: "b1cb66ffd9368e",
-  password: "822dff14",
-  database: "heroku_462665c36d4d83f",
+  host: process.env.DB_HT,
+  port: process.env.DB_PT,
+  user: process.env.DB_UR,
+  password: process.env.DB_PW,
+  database: process.env.DB_DB,
 });
 
-app.use(cors())
+db.connect((err) => {
+  if (err) {
+    console.log(err);
+  }
+  console.log("sikeres csatlakozás az adatbázishoz");
+});
+
+app.use(cors());
 app.use(express.json());
 app.use(bodyParser());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  const myQuery = "SELECT * FROM admin";
+app.get("/getHeader", async (req, res) => {
+  const myQuery = await "SELECT title, sub_title FROM header";
+
+  db.query(myQuery, (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+    res.status(200).send(result);
+  });
+});
+
+app.post("/createHeader", (req, res) => {
+  const { title, subTitle } = req.body;
+
+  const myQuery = `INSERT INTO header (title, sub_title) VALUES ('${title}','${subTitle}')`;
 
   db.query(myQuery, (err, result) => {
     if (err) {
       console.log(err);
     } else {
-      if (result) {
-        res.status(200).send(result);
-      }
+      res.status(200);
     }
   });
 });
 
-app.post("/create", (req, res) => {
-  const {title} = req.body;
-
-  const myQuery = "INSERT INTO admin (title) VALUES (?)";
-
-  db.query(myQuery, [title], (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.status(200).send("sikeres felvétel az adatbázisba!");
-    }
-  });
-});
-
-app.put("/update/:id", (req, res) => {
+app.put("/updateHeader/:id", (req, res) => {
   const id = parseInt(req.params.id);
-  const { title } = req.body;
+  let { title, subTitle, defTitle, defSubTitle } = req.body;
 
-  const myQuery = `  UPDATE admin SET title = '${title}' WHERE id=${id}`;
+  if (title === "") {
+    title = " ";
+  } else if (subTitle === "") {
+    subTitle = " ";
+  }
 
-  db.query(myQuery, (err, result) => {
-    if (err) {
-      console.log(err);
+  if (title && subTitle) {
+    const myQuery = `UPDATE header SET title = '${title}',  sub_title = '${subTitle}' WHERE id=${id}`;
+
+    db.query(myQuery, (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.status(200).send({ message: "felhasználó módosítva" });
+    });
+  } else {
+    if (title) {
+      const myQuery = `UPDATE header SET title = '${title}' WHERE id=${id}`;
+
+      db.query(myQuery, (err, result) => {
+        if (err) {
+          console.log(err);
+        }
+        return res.status(200).send({ message: "felhasználó módosítva" });
+      });
     }
-    res.status(200).send({ message: "felhasználó törölve" });
-  });
+    if (subTitle) {
+      const myQuery = `UPDATE header SET sub_title = '${subTitle}' WHERE id=${id}`;
+
+      db.query(myQuery, (err, result) => {
+        if (err) {
+          console.log(err);
+        }
+        res.status(200).send({ message: "felhasználó módosítva" });
+      });
+    }
+  }
 });
 
 app.get("/", (req, res) => {
-  res.send("sikeres csatlakozás")
-})
+  res.send("sikeres csatlakozás");
+});
 
-app.listen(port);
+app.listen(port, () => {
+  console.log(`A szerver fut: ${port}`);
+});

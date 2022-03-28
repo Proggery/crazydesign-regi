@@ -1,12 +1,12 @@
 import apiClient from "../api/apiClient";
 
 const dataService = () => {
-  const getAllData = () => apiClient().get();
-  const createData = (data) => apiClient().post(`/create`, data);
-  const updateData = (data,id) => apiClient().put(`/update/${id}`, data);
+  const getHeader = () => apiClient().get('/getHeader');
+  const createData = (data) => apiClient().post(`/createHeader`, data);
+  const updateData = (data,id) => apiClient().put(`/updateHeader/${id}`, data);
 
   return {
-    getAllData,
+    getHeader,
     createData,
     updateData
   };

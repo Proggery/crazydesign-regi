@@ -48,7 +48,7 @@ $box-shadow-inset-dark: 0.4rem 0.4rem 1rem #333 inset,
   transition: 0.2s linear;
 }
 html {
-  font-size: 62.5%;
+  // font-size: 62.5%;
   overflow-x: hidden;
   scroll-behavior: smooth;
   
@@ -79,9 +79,9 @@ html {
   }
 
   @include media-max(lg) {
-    font-size: 55%;
+    // font-size: 55%;
   }
   @include media-max(xs) {
-    font-size: 50%;
+    // font-size: 50%;
   }
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./css/app.scss";
-import { BrowserRouter as Router, Route, Switch, HashRouter } from "react-router-dom";
+import { Route, Switch, HashRouter } from "react-router-dom";
 
 // Layout-ok / keretek
 import FrontPage from "./layouts/frontPage.jsx";
