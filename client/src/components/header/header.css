@@ -114,7 +114,7 @@ input, select {
 }
 
 .header h3 {
-  font-size: 7rem;
+  font-size: 5rem;
   color: var(--black);
   line-height: 1.1;
   text-transform: uppercase;

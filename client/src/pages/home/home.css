@@ -106,7 +106,7 @@ input, select {
 
 .home__frame {
   background: var(--bg-color);
-  padding-left: 30rem;
+  padding-left: 23rem;
 }
 
 @media (max-width: 991.98px) {

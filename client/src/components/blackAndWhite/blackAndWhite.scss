@@ -5,8 +5,8 @@
   top: 1.5rem;
   right: 2rem;
   z-index: 1000;
-  height: 5rem;
-  width: 5rem;
+  height: 3.8rem;
+  width: 3.8rem;
   border-radius: 50%;
   font-size: 2rem;
   cursor: pointer;
@@ -26,8 +26,8 @@
   .sun {
     background: #eb9d00;
     mask: url("../../img/icons/sun-svgrepo-com.svg") no-repeat;
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
     transition: 1s;
     animation: show 1s forwards;
     opacity: 0;

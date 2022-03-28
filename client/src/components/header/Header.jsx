@@ -3,14 +3,14 @@ import "./header.css";
 import { Link } from "react-scroll";
 import Share from "../share/Share";
 import { useDispatch, useSelector } from "react-redux";
-import { loadHeader } from "../../redux/reducers/datas/thunks";
+import { loadGetHeader } from "../../redux/reducers/datas/thunks";
 
 export default function Header() {
   const dispatch = useDispatch();
   const { isLoading, allData } = useSelector((state) => state.data);
 
   useEffect(() => {
-    dispatch(loadHeader());
+    dispatch(loadGetHeader());
   }, [dispatch]);
 
   return (
