@@ -1,12 +1,10 @@
-import DataService from "../../../services/dataService";
-import actions from "../../actions/datas/action";
+import DataService from "../../../services/headerService";
+import actions from "../../actions/header/action";
 
 export const loadGetHeader = () => (dispatch) => {
-  dispatch(actions.loadingData());
-
   DataService().getHeader()
     .then((res) => {
-      dispatch(actions.getAllData(res.data));
+      dispatch(actions.getHeader(res.data));
     })
     .catch((err) => {
       console.log(err);
@@ -18,7 +16,7 @@ export const loadCreateHeader = (data) => (dispatch) => {
     .createHeader(data)
     .then(() => {
       console.log("sikeres felvétel");
-      dispatch(actions.createData());
+      dispatch(actions.createHeader());
     })
     .catch((err) => {
       console.log(err);
@@ -29,7 +27,7 @@ export const loadCreateHeader = (data) => (dispatch) => {
     .updateHeader(data, id)
     .then((res) => {
       console.log("sikeres módosítás");
-      dispatch(actions.updateData());
+      dispatch(actions.updateHeader());
     })
     .catch((err) => {
       console.log(err);

@@ -1,6 +1,6 @@
 import apiClient from "../api/apiClient";
 
-const dataService = () => {
+const headerService = () => {
   const getHeader = () => apiClient().get('/getHeader');
   const createHeader = (data) => apiClient().post(`/createHeader`, data);
   const updateHeader = (data,id) => apiClient().put(`/updateHeader/${id}`, data);
@@ -12,4 +12,4 @@ const dataService = () => {
   };
 };
 
-export default dataService;
+export default headerService;

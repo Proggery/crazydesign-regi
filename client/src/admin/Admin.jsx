@@ -19,8 +19,8 @@ const lightTheme = createTheme({ palette: { mode: "light" } });
 
 const Admin = () => {
   return (
-    <Container maxWidth="lg" sx={{mt:8}}>
-      <Grid container spacing={2}>
+    <Container sx={{mt:8}}>
+      <Grid >
         {[lightTheme].map((theme, key) => (
           <Grid key={key}>
             <ThemeProvider theme={theme}>

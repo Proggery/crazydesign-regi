@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
-import reducer from "./datas/reducer";
+import headerReducer from "./header/reducer";
+import socialReducer from "./social/reducer";
 
 const rootReducer = () =>
   combineReducers({
-    data: reducer,
+    header: headerReducer,
+    social: socialReducer,
   });
 
 export default rootReducer;

@@ -1,18 +1,29 @@
 import React from "react";
 import "./share.css";
 import { ExternalLink } from "react-external-link";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadGetSocial } from "../../redux/reducers/social/thunks";
 
 export default function Share() {
+  const dispatch = useDispatch();
+  const { getSocial } = useSelector((state) => state.social);
+
+  
+  useEffect(() => {
+    dispatch(loadGetSocial())
+  },[dispatch])
+
+  console.log(getSocial)
+  
+
   return (
     <div className="share">
-      <ExternalLink href="http://facebook.com/">
-        <div className="share__icon fab fa-facebook-f"></div>
+    {getSocial&&getSocial.map(social => (
+      <ExternalLink href={social.path}>
+        <div className={`share__icon ${social.class_name}`}></div>
       </ExternalLink>
-      <ExternalLink>
-        <div className="share__icon fab fa-instagram"></div>
-      </ExternalLink>
-
-
+    ))}
 
       {/* <Link to="#" className="fab fa-twitter"></Link> */}
       {/* <Link to="#" className="fab fa-linkedin"></Link> */}

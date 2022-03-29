@@ -8,7 +8,7 @@ const TextInput = (props) => {
     id="textInput"
     sx={{my: 2}}
       label={props.label}
-      defaultValue={props.defaultValue !== " " ? props.defaultValue : ""}
+      defaultValue={props.defaultValue}
       onChange={props.onChange}
       name={props.name}
       variant={props.variant}

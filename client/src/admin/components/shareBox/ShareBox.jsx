@@ -1,86 +1,105 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  loadGetHeader,
-  loadCreateHeader,
-  loadUpdateHeader,
-} from "../../../redux/reducers/datas/thunks";
+  loadGetSocial,
+  loadCreateSocial,
+  loadUpdateSocial,
+  loadDeleteSocial,
+} from "../../../redux/reducers/social/thunks";
 import TextInput from "../../../components/htmlElements/inputs/TextInput";
-import SendButton from "../../../components/htmlElements/buttons/SendButton";
 
 const HeaderBox = () => {
   const dispatch = useDispatch();
-  const { allData } = useSelector((state) => state.data);
+  const { getSocial } = useSelector((state) => state.social);
 
-  const [data, setData] = useState({
-    title: "",
-    subTitle: "",
-  });
+  const [data, setData] = useState({});
+
   const [error, setError] = useState("");
-  const [inputChange, setInputChange] = useState(true);
-  const { title, subTitle } = data;
+  const { socialPath, socialClass } = data;
 
   useEffect(() => {
-    dispatch(loadGetHeader());
+    dispatch(loadGetSocial());
   }, [dispatch]);
 
   useEffect(() => {
-    if (allData) {
-      if (allData[0]) {
-        setInputChange(false);
-        setData({
-          ...data,
-          title: allData[0].title,
-          subTitle: allData[0].sub_title,
-        });
-      } else {
-        setInputChange(true);
-      }
+    console.log(data);
+    if (getSocial) {
+      setData({
+        ...data,
+        getSocial,
+      });
     }
-  }, [allData]);
+  }, [getSocial]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
 
-  const handleSubmit = () => {
-    if (!title || !subTitle) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+console.log(data)
+    if (!socialPath && !socialClass) {
       setError("Kérlek tölts ki minden mezőt!");
+    } else if (data.getSocial.length >= 5) {
+      return setError("Csak 5 hozható létre!");
     } else {
-      dispatch(loadCreateHeader(data));
-      window.location.reload();
+      dispatch(loadCreateSocial(data));
+      setData({ ...data, socialPath: "" });
     }
-    dispatch(loadGetHeader());
+    window.location.reload();
   };
 
   const handleUpdate = (e, id) => {
     e.preventDefault();
-    dispatch(loadUpdateHeader(data, id));
+    dispatch(loadUpdateSocial(data, id));
   };
 
-  const titleInputProps = {
+  const handleDelete = (id) => {
+    dispatch(loadDeleteSocial(id));
+    window.location.reload();
+  };
+
+  const socialCreatePathProps = {
     label: "Útvonal (URL)",
-    name: "title",
+    name: "socialPath",
     onChange: handleChange,
+    defaultValue: "",
     variant: "standard",
     placeholder: "pl.: https://facebook.com/",
   };
 
-  const subTitleInputProps = {
-    ...titleInputProps,
-    name: "subTitle",
-    label: "Alszöveg",
+  const socialCreateIconProps = {
+    label: "Class megadása",
+    name: "socialClass",
+    onChange: handleChange,
+    defaultValue: "",
+    variant: "standard",
+    placeholder: "pl.: fab fa-facebook-f",
   };
+  
+  const socialUpdatePathProps = {
+    label: "Útvonal (URL)",
+    name: "socialPath",
+    onChange: handleChange,
+    variant: "standard",
+    placeholder: "pl.: https://facebook.com/",
+  };
+  
+  const socialUpdateIconProps = {
+    label: "Class megadása",
+    name: "socialClass",
+    onChange: handleChange,
+    variant: "standard",
+    placeholder: "pl.: fab fa-facebook-f",
+  };
+
   const submitButtonProps = {
     value: "Létrehoz",
     onClick: handleSubmit,
-    variant: "contained",
-  };
-  const updateButtonProps = {
-    value: "Módosít",
-    onClick: (e) => handleUpdate(e, 1),
     variant: "contained",
   };
 
@@ -96,16 +115,26 @@ const HeaderBox = () => {
       {error}
       <h2>Social média beállítás</h2>
 
-      <div className="config__box">
-        <TextInput {...titleInputProps} />
-        <SendButton {...submitButtonProps} />
-      </div>
+      <Box
+        className="config__box"
+        sx={getSocial && getSocial.length === 5 ? { display: "none" } : {display: "unset"}}
+      >
+        <TextInput {...socialCreatePathProps} />
+        <TextInput {...socialCreateIconProps} />
 
-      {allData &&
-        allData.map((data, key) => (
-          <div className="config__box" key={key}>
-            <TextInput defaultValue={data.title} {...titleInputProps} />
-            <SendButton {...updateButtonProps} />
+        <button {...submitButtonProps}>L</button>
+      </Box>
+
+      {getSocial &&
+        getSocial.map((data) => (
+          <div className="config__box" key={data.id}>
+            <TextInput defaultValue={data.path} {...socialUpdatePathProps} />
+            <TextInput defaultValue={data.class_name} {...socialUpdateIconProps} />
+            <EditIcon
+              className="fa-solid fa-pen-to-square"
+              onClick={(e) => handleUpdate(e, data.id)}
+            ></EditIcon>
+            <DeleteIcon onClick={() => handleDelete(data.id)}>T</DeleteIcon>
           </div>
         ))}
     </Box>

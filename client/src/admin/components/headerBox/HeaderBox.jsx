@@ -5,13 +5,13 @@ import {
   loadGetHeader,
   loadCreateHeader,
   loadUpdateHeader,
-} from "../../../redux/reducers/datas/thunks";
+} from "../../../redux/reducers/header/thunks";
 import TextInput from "../../../components/htmlElements/inputs/TextInput";
 import SendButton from "../../../components/htmlElements/buttons/SendButton";
 
 const HeaderBox = () => {
   const dispatch = useDispatch();
-  const { allData } = useSelector((state) => state.data);
+  const { getHeader } = useSelector((state) => state.header);
 
   const [data, setData] = useState({
     title: "",
@@ -26,19 +26,19 @@ const HeaderBox = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (allData) {
-      if (allData[0]) {
+    if (getHeader) {
+      if (getHeader[0]) {
         setInputChange(false);
         setData({
           ...data,
-          title: allData[0].title,
-          subTitle: allData[0].sub_title,
+          title: getHeader[0].title,
+          subTitle: getHeader[0].sub_title,
         });
       } else {
         setInputChange(true);
       }
     }
-  }, [allData]);
+  }, [getHeader]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -87,7 +87,7 @@ const HeaderBox = () => {
     <Box
       component="form"
       sx={{
-        "& > :not(style)": { m: 1 },
+        "& > :not(style)": { m: 1 }
       }}
       noValidate
       autoComplete="off"
@@ -101,8 +101,8 @@ const HeaderBox = () => {
           <SendButton {...submitButtonProps} />
         </div>
       ) : (
-        allData &&
-        allData.map((data, key) => (
+        getHeader &&
+        getHeader.map((data, key) => (
           <div className="config__box" key={key}>
             <TextInput defaultValue={data.title} {...titleInputProps} />
             <TextInput defaultValue={data.sub_title} {...subTitleInputProps} />
