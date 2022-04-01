@@ -14,9 +14,9 @@ export const loadGetHeader = () => (dispatch) => {
 export const loadCreateHeader = (data) => (dispatch) => {
   DataService()
     .createHeader(data)
-    .then(() => {
-      console.log("sikeres felvétel");
-      dispatch(actions.createHeader());
+    .then((res) => {
+      console.log(res.data.errorMessage)
+      dispatch(actions.errorMessage(res.data.errorMessage));
     })
     .catch((err) => {
       console.log(err);

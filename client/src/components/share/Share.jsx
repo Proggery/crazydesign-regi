@@ -9,21 +9,18 @@ export default function Share() {
   const dispatch = useDispatch();
   const { getSocial } = useSelector((state) => state.social);
 
-  
   useEffect(() => {
-    dispatch(loadGetSocial())
-  },[dispatch])
-
-  console.log(getSocial)
-  
+    dispatch(loadGetSocial());
+  }, [dispatch]);
 
   return (
     <div className="share">
-    {getSocial&&getSocial.map(social => (
-      <ExternalLink href={social.path}>
-        <div className={`share__icon ${social.class_name}`}></div>
-      </ExternalLink>
-    ))}
+      {getSocial &&
+        getSocial.map((social) => (
+          <ExternalLink key={social.id} href={social.path}>
+            <div className={`share__icon ${social.class_name}`}></div>
+          </ExternalLink>
+        ))}
 
       {/* <Link to="#" className="fab fa-twitter"></Link> */}
       {/* <Link to="#" className="fab fa-linkedin"></Link> */}

@@ -1,0 +1,22 @@
+#share__box.configBox {
+  .configBox__content {
+    display: grid !important;
+    grid-template-columns: 40% 35% auto;
+    gap: 2rem;
+
+    .submit__button {
+      color: rgb(0, 177, 0);
+    }
+    .update__button {
+      color: rgb(7, 0, 200);
+    }
+    .delete__button {
+      color: rgb(214, 0, 0);
+    }
+  }
+  svg {
+    cursor: pointer;
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+}

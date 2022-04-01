@@ -14,6 +14,16 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
       };
+    case actionType.ERROR_MESSAGE:
+      return {
+        ...state,
+        error: payload,
+      };
+    case actionType.IS_FULL:
+      return {
+        ...state,
+        isFull: true,
+      };
 
     default:
       return state;

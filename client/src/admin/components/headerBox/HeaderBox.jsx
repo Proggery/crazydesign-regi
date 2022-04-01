@@ -8,17 +8,19 @@ import {
 } from "../../../redux/reducers/header/thunks";
 import TextInput from "../../../components/htmlElements/inputs/TextInput";
 import SendButton from "../../../components/htmlElements/buttons/SendButton";
+import { showDefValue } from "../../../components/htmlElements/inputs/properties";
 
 const HeaderBox = () => {
   const dispatch = useDispatch();
-  const { getHeader } = useSelector((state) => state.header);
+  const { getHeader, errorMessage } = useSelector((state) => state.header);
 
   const [data, setData] = useState({
     title: "",
     subTitle: "",
   });
-  const [error, setError] = useState("");
   const [inputChange, setInputChange] = useState(true);
+  const [error, setError] = useState("");
+
   const { title, subTitle } = data;
 
   useEffect(() => {
@@ -29,15 +31,19 @@ const HeaderBox = () => {
     if (getHeader) {
       if (getHeader[0]) {
         setInputChange(false);
+
         setData({
           ...data,
           title: getHeader[0].title,
           subTitle: getHeader[0].sub_title,
         });
-      } else {
-        setInputChange(true);
       }
+      setError(errorMessage);
+    } else {
+      setInputChange(true);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getHeader]);
 
   const handleChange = (e) => {
@@ -46,12 +52,7 @@ const HeaderBox = () => {
   };
 
   const handleSubmit = () => {
-    if (!title || !subTitle) {
-      setError("Kérlek tölts ki minden mezőt!");
-    } else {
-      dispatch(loadCreateHeader(data));
-      window.location.reload();
-    }
+    dispatch(loadCreateHeader(data));
     dispatch(loadGetHeader());
   };
 
@@ -87,25 +88,33 @@ const HeaderBox = () => {
     <Box
       component="form"
       sx={{
-        "& > :not(style)": { m: 1 }
+        "& > :not(style)": { m: 1 },
       }}
       noValidate
       autoComplete="off"
+      className="configBox"
     >
+      <div className="configBox__header">
+        <h2>Fejléc beállítás</h2>
+      </div>
       {error}
-      <h2>Fejléc beállítás</h2>
       {inputChange ? (
-        <div className="config__box">
+        <div className="configBox__content">
           <TextInput {...titleInputProps} />
           <TextInput {...subTitleInputProps} />
           <SendButton {...submitButtonProps} />
         </div>
       ) : (
         getHeader &&
-        getHeader.map((data, key) => (
-          <div className="config__box" key={key}>
-            <TextInput defaultValue={data.title} {...titleInputProps} />
-            <TextInput defaultValue={data.sub_title} {...subTitleInputProps} />
+        getHeader.map((item, key) => (
+          <div className="configBox__content" key={key}>
+            <TextInput defaultValue={title} {...titleInputProps} />
+
+            <TextInput
+              showDefValue={showDefValue}
+              defaultValue={subTitle}
+              {...subTitleInputProps}
+            />
             <SendButton {...updateButtonProps} />
           </div>
         ))

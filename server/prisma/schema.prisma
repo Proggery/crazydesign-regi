@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model account {
+  id Int @id @default(autoincrement())
+}
+
+model header_config {
+  id        Int     @id @default(autoincrement())
+  title     String? @db.VarChar(45)
+  sub_title String? @db.VarChar(45)
+}
+
+model social_config {
+  id         Int     @id @default(autoincrement())
+  path       String? @unique(map: "path") @db.VarChar(45)
+  class_name String  @db.VarChar(45)
+}

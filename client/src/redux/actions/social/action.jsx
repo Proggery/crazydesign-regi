@@ -13,12 +13,22 @@ const updateSocial = () => ({
 const deleteSocial = () => ({
   type: actionType.DELETE_SOCIAL,
 });
+const errorMessage = (error) => ({
+  type: actionType.ERROR_MESSAGE,
+  payload: error,
+});
+const isFull = (isFull) => ({
+  type: actionType.IS_FULL,
+  payload: isFull,
+});
 
 const actions = {
   getSocial,
   createSocial,
   updateSocial,
-  deleteSocial
+  deleteSocial,
+  errorMessage,
+  isFull,
 };
 
 export default actions;

@@ -10,11 +10,16 @@ const createHeader = () => ({
 const updateHeader = () => ({
   type: actionType.UPDATE_HEADER,
 });
+const errorMessage = (error) => ({
+  type: actionType.ERROR_MESSAGE,
+  payload: error,
+});
 
 const actions = {
   getHeader,
   createHeader,
-  updateHeader
+  updateHeader,
+  errorMessage
 };
 
 export default actions;

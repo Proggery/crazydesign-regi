@@ -13,22 +13,38 @@ router.get("/getSocial", async (req, res) => {
 });
 
 router.post("/createSocial", (req, res) => {
-  const { id, socialPath, socialClass } = req.body;
+  const { socialPath, socialClass } = req.body;
+  const datas = req.body.getSocial;
 
-  console.log(req.body);
+  // for (let i = 0; i < data.length; i++) {
+  //   const element = data[i];
+  //   console.log(element.id);
+  // }
 
-  if (id > 5) {
-    return res.status(400).send({ message: "Csak 5 hozható létre!" });
+  if (!socialPath) {
+    return res.send({ errorMessage: "Meg kell adnod az elérési utat!" });
   } else {
-    const myQuery = `INSERT INTO social_config (path, class_name) VALUES ('${socialPath}','${socialClass}')`;
+    if (datas.length > 4) {
+      console.log("teszt");
+    } else {
+      datas.forEach((data) => {
+        if (socialPath !== data.path) {
+          const myQuery = `INSERT INTO social_config (path, class_name) VALUES ('${socialPath}','${socialClass}')`;
 
-    db.query(myQuery, (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.status(200).send({ message: "felhasználó létrehozva" });
-      }
-    });
+          db.query(myQuery, (err, result) => {
+            if (err) {
+              console.log(err);
+            } else {
+              res.status(200).send({ message: "social icon létrehozva" });
+            }
+          });
+        } else {
+          return res.send({ message: "már létezik" });
+        }
+      });
+    }
+
+    // return res.send({ isFull: true });
   }
 });
 
@@ -54,7 +70,7 @@ router.delete("/deleteSocial/:id", (req, res) => {
     if (err) {
       console.log(err);
     }
-    res.status(200).send({ message: "felhasználó módosítva" });
+    res.status(200).send({ message: "felhasználó törölve" });
   });
 });
 

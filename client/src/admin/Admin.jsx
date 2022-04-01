@@ -1,47 +1,29 @@
 import * as React from "react";
-import "./admin.css";
-import Grid from "@mui/material/Grid";
+import "./css/admin.css";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import HeaderBox from "./components/headerBox/HeaderBox";
 import ShareBox from "./components/shareBox/ShareBox";
 import { Container } from "@mui/material";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
-  textAlign: "center",
   color: theme.palette.text.secondary,
   lineHeight: "60px",
 }));
 
-const lightTheme = createTheme({ palette: { mode: "light" } });
-
 const Admin = () => {
   return (
-    <Container sx={{mt:8}}>
-      <Grid >
-        {[lightTheme].map((theme, key) => (
-          <Grid key={key}>
-            <ThemeProvider theme={theme}>
-              <Box
-                sx={{
-                  display: "grid",
-                  gap: "3rem",
-                  gridTemplateColumns: "repeat(3, 1fr)",
-                }}
-              >
-                <Item sx={{ p: "30px" }} elevation={3}>
-                  <HeaderBox />
-                </Item>
-                <Item sx={{ p: "30px" }} elevation={3}>
-                  <ShareBox />
-                </Item>
-              </Box>
-            </ThemeProvider>
-          </Grid>
-        ))}
-      </Grid>
+    <Container id="admin" sx={{ mt: 8 }}>
+      <Box className="admin__content">
+        <Item className="header__box__item" sx={{ p: "30px" }}>
+          <HeaderBox />
+        </Item>
+        <Item className="share__box__item" sx={{ p: "30px" }}>
+          <ShareBox />
+        </Item>
+      </Box>
     </Container>
   );
 };

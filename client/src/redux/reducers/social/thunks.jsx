@@ -16,8 +16,10 @@ export const loadCreateSocial = (data) => (dispatch) => {
   DataService()
     .createSocial(data)
     .then((res) => {
-      console.log(res);
-      dispatch(actions.createSocial(res));
+      console.log(res.data);
+      if (res.data.errorMessage) {
+        dispatch(actions.errorMessage(res.data));
+      }
     })
     .catch((err) => {
       console.log(err);

@@ -13,6 +13,11 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
       };
+    case actionType.ERROR_MESSAGE:
+      return {
+        ...state,
+        errorMessage: payload,
+      };
 
     default:
       return state;

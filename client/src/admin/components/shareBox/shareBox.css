@@ -1,0 +1,24 @@
+#share__box.configBox .configBox__content {
+  display: grid !important;
+  grid-template-columns: 40% 35% auto;
+  gap: 2rem;
+}
+
+#share__box.configBox .configBox__content .submit__button {
+  color: #00b100;
+}
+
+#share__box.configBox .configBox__content .update__button {
+  color: #0700c8;
+}
+
+#share__box.configBox .configBox__content .delete__button {
+  color: #d60000;
+}
+
+#share__box.configBox svg {
+  cursor: pointer;
+  width: 2.2rem;
+  height: 2.2rem;
+}
+/*# sourceMappingURL=shareBox.css.map */
