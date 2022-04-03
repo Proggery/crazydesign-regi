@@ -1,15 +1,15 @@
 const socialCreatePathProps = {
+  id: "socialCreatePathProps",
   label: "Útvonal (URL)",
   name: "socialPath",
-  defaultValue: "",
   variant: "standard",
   placeholder: "pl.: https://facebook.com/",
 };
 
-const socialCreateIconProps = {
+const socialCreateClassProps = {
+  id: "socialCreateClassProps",
   label: "Class megadása",
   name: "socialClass",
-  defaultValue: "",
   variant: "standard",
   placeholder: "pl.: fab fa-facebook-f",
 };
@@ -35,8 +35,8 @@ const submitButtonProps = {
 
 export {
   socialCreatePathProps,
-  socialCreateIconProps,
+  socialCreateClassProps,
   socialUpdatePathProps,
   socialUpdateIconProps,
-  submitButtonProps
+  submitButtonProps,
 };

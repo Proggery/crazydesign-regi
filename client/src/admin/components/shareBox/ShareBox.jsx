@@ -8,65 +8,67 @@ import {
   loadCreateSocial,
   loadUpdateSocial,
   loadDeleteSocial,
-} from "../../../redux/reducers/social/thunks";
+} from "../../../redux/social/reducers/thunks";
 import TextInput from "../../../components/htmlElements/inputs/TextInput";
 import {
   socialCreatePathProps,
-  socialCreateIconProps,
+  socialCreateClassProps,
   socialUpdatePathProps,
   socialUpdateIconProps,
   submitButtonProps,
 } from "./properties";
-import { inputEmptyError } from "../../../components/htmlElements/inputs/properties";
+// import { inputEmptyError } from "../../../components/htmlElements/inputs/properties";
 
 const HeaderBox = () => {
   const dispatch = useDispatch();
-  const { getSocial, error, isFull } = useSelector((state) => state.social);
+  const { getSocial, message } = useSelector((state) => state.social);
 
   const [data, setData] = useState({});
-  // const [errorMessage, setErrorMessage] = useState("");
-  // const [isFullElements, setIsFullElements] = useState({});
+  const [updateData, setUpdateData] = useState({});
 
-  // const { socialPath, socialClass } = data;
-
-  if (isFull) {
-    console.log(isFull);
-  }
+  const [resMessage, setResMessage] = useState({});
 
   useEffect(() => {
     dispatch(loadGetSocial());
   }, [dispatch]);
 
   useEffect(() => {
-    if (getSocial) {
-      setData({
-        ...data,
-        getSocial,
-      });
-    }
+    setData({
+      ...data,
+      getSocial,
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getSocial]);
+  }, []);
+
+  useEffect(() => {
+    setResMessage(message);
+  }, [message]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
 
+  const handleUpdateChange = (e) => {
+    const { name, value } = e.target;
+    setUpdateData({ ...updateData, [name]: value });
+  };
+
   const handleSubmit = () => {
     dispatch(loadCreateSocial(data));
     setData({ ...data, socialPath: "" });
 
-    dispatch(loadGetSocial());
+    document.getElementById("socialCreatePathProps").value = "";
+    document.getElementById("socialCreateClassProps").value = "";
   };
 
-  const handleUpdate = (e, id) => {
-    e.preventDefault();
-    dispatch(loadUpdateSocial(data, id));
+  const handleUpdate = (id) => {
+    dispatch(loadUpdateSocial(updateData, id));
+    dispatch(loadGetSocial());
   };
 
   const handleDelete = (id) => {
     dispatch(loadDeleteSocial(id));
-    dispatch(loadGetSocial());
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -81,6 +83,8 @@ const HeaderBox = () => {
 
   const open = Boolean(anchorEl);
 
+  console.log(data.socialPath);
+
   return (
     <Box
       id="share__box"
@@ -92,10 +96,12 @@ const HeaderBox = () => {
       autoComplete="off"
       className="configBox"
     >
-      {/* {error} */}
       <div className="configBox__header">
         <h2>Social média beállítás</h2>
       </div>
+
+      {resMessage && resMessage.error_message}
+      {resMessage && resMessage.success_message}
 
       <Box
         // sx={
@@ -105,8 +111,16 @@ const HeaderBox = () => {
         // }
         className="configBox__content"
       >
-        <TextInput onChange={handleChange} {...socialCreatePathProps} />
-        <TextInput onChange={handleChange} {...socialCreateIconProps} />
+        <TextInput
+          // defaultValue=""
+          onChange={handleChange}
+          {...socialCreatePathProps}
+        />
+        <TextInput
+          // defaultValue=""
+          onChange={handleChange}
+          {...socialCreateClassProps}
+        />
         <Box
           sx={{
             display: "flex",
@@ -120,11 +134,11 @@ const HeaderBox = () => {
       </Box>
 
       {getSocial &&
-        getSocial.map((data) => (
-          <Box key={data.id} className="configBox__content">
+        getSocial.map((item) => (
+          <Box key={item.id} className="configBox__content">
             <TextInput
-              onChange={handleChange}
-              defaultValue={data.path}
+              onChange={handleUpdateChange}
+              defaultValue={item.path}
               {...socialUpdatePathProps}
             />
             <div
@@ -134,8 +148,8 @@ const HeaderBox = () => {
               onMouseLeave={handlePopoverClose}
             >
               <TextInput
-                onChange={handleChange}
-                defaultValue={data.class_name}
+                onChange={handleUpdateChange}
+                defaultValue={item.class_name}
                 {...socialUpdateIconProps}
                 disabled
               />
@@ -172,11 +186,11 @@ const HeaderBox = () => {
             >
               <Edit
                 className="update__button"
-                onClick={(e) => handleUpdate(e, data.id)}
+                onClick={() => handleUpdate(item.id)}
               ></Edit>
               <Delete
                 className="delete__button"
-                onClick={() => handleDelete(data.id)}
+                onClick={() => handleDelete(item.id)}
               >
                 T
               </Delete>

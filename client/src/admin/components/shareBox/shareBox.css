@@ -4,7 +4,11 @@
   gap: 2rem;
 }
 
-#share__box.configBox .configBox__content .submit__button {
+#share__box.configBox .configBox__content button {
+  background: none;
+}
+
+#share__box.configBox .configBox__content button .submit__button {
   color: #00b100;
 }
 

@@ -3,7 +3,7 @@ import "./share.css";
 import { ExternalLink } from "react-external-link";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadGetSocial } from "../../redux/reducers/social/thunks";
+import { loadGetSocial } from "../../redux/social/reducers/thunks";
 
 export default function Share() {
   const dispatch = useDispatch();

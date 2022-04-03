@@ -3,7 +3,7 @@ import "./header.css";
 import { Link } from "react-scroll";
 import Share from "../share/Share";
 import { useDispatch, useSelector } from "react-redux";
-import { loadGetHeader } from "../../redux/reducers/header/thunks";
+import { loadGetHeader } from "../../redux/header/reducers/thunks";
 
 export default function Header() {
   const dispatch = useDispatch();

@@ -6,6 +6,7 @@ import { styled } from "@mui/material/styles";
 import HeaderBox from "./components/headerBox/HeaderBox";
 import ShareBox from "./components/shareBox/ShareBox";
 import { Container } from "@mui/material";
+import FileUpload from "./components/fileUpload/FileUpload";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -22,6 +23,9 @@ const Admin = () => {
         </Item>
         <Item className="share__box__item" sx={{ p: "30px" }}>
           <ShareBox />
+        </Item>
+        <Item className="" sx={{ p: "30px" }}>
+          <FileUpload />
         </Item>
       </Box>
     </Container>

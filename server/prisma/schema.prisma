@@ -20,5 +20,11 @@ model header_config {
 model social_config {
   id         Int     @id @default(autoincrement())
   path       String? @unique(map: "path") @db.VarChar(45)
-  class_name String  @db.VarChar(45)
+  class_name String? @db.VarChar(45)
+}
+
+model upload_images {
+  id       Int     @id @default(autoincrement())
+  img_alt  String? @db.VarChar(45)
+  img_name String? @db.VarChar(45)
 }

@@ -5,7 +5,7 @@ import {
   loadGetHeader,
   loadCreateHeader,
   loadUpdateHeader,
-} from "../../../redux/reducers/header/thunks";
+} from "../../../redux/header/reducers/thunks";
 import TextInput from "../../../components/htmlElements/inputs/TextInput";
 import SendButton from "../../../components/htmlElements/buttons/SendButton";
 import { showDefValue } from "../../../components/htmlElements/inputs/properties";
