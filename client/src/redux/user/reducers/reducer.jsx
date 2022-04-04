@@ -3,17 +3,17 @@ import initialState from "./initialState";
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case actionType.GET_USER:
+    case actionType.GET_DATA:
       return {
         ...state,
-        getUser: payload,
+        getData: payload,
       };
-    case actionType.CREATE_USER:
-    case actionType.UPDATE_USER:
+    case actionType.CREATE_DATA:
+    case actionType.UPDATE_DATA:
       return {
         ...state,
       };
-      case actionType.USER_MESSAGE:
+      case actionType.MESSAGE:
         return {
           ...state,
           message: payload,

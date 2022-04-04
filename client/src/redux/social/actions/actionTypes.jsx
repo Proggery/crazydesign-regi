@@ -1,5 +1,5 @@
-export const GET_SOCIAL = "GET_SOCIAL";
-export const CREATE_SOCIAL = "CREATE_SOCIAL";
-export const UPDATE_SOCIAL = "UPDATE_SOCIAL";
-export const DELETE_SOCIAL = "DELETE_SOCIAL";
-export const SOCIAL_MESSAGE = "SOCIAL_MESSAGE";
+export const GET_DATA = "GET_SOCIAL";
+export const CREATE_DATA = "CREATE_SOCIAL";
+export const UPDATE_DATA = "UPDATE_SOCIAL";
+export const DELETE_DATA = "DELETE_SOCIAL";
+export const MESSAGE = "SOCIAL_MESSAGE";

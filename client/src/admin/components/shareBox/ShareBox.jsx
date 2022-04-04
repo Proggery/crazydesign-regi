@@ -4,10 +4,10 @@ import { Edit, Delete, Check } from "@mui/icons-material";
 import { Popover, Typography, Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  loadGetSocial,
-  loadCreateSocial,
-  loadUpdateSocial,
-  loadDeleteSocial,
+  loadGetData,
+  loadCreateData,
+  loadUpdateData,
+  loadDeleteData,
 } from "../../../redux/social/reducers/thunks";
 import TextInput from "../../../components/htmlElements/inputs/TextInput";
 import {
@@ -21,20 +21,20 @@ import {
 
 const HeaderBox = () => {
   const dispatch = useDispatch();
-  const { getSocial, message } = useSelector((state) => state.social);
+  const { getData, message } = useSelector((state) => state.social);
 
   const [data, setData] = useState({});
   const [updateData, setUpdateData] = useState({});
   const [resMessage, setResMessage] = useState({});
 
   useEffect(() => {
-    dispatch(loadGetSocial());
+    dispatch(loadGetData());
   }, [dispatch]);
 
   useEffect(() => {
     setData({
       ...data,
-      getSocial,
+      getData,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -54,7 +54,7 @@ const HeaderBox = () => {
   };
 
   const handleSubmit = () => {
-    dispatch(loadCreateSocial(data));
+    dispatch(loadCreateData(data));
     setData({ ...data, socialPath: "" });
 
     document.getElementById("socialCreatePathProps").value = "";
@@ -62,12 +62,12 @@ const HeaderBox = () => {
   };
 
   const handleUpdate = (id) => {
-    dispatch(loadUpdateSocial(updateData, id));
-    dispatch(loadGetSocial());
+    dispatch(loadUpdateData(updateData, id));
+    dispatch(loadGetData());
   };
 
   const handleDelete = (id) => {
-    dispatch(loadDeleteSocial(id));
+    dispatch(loadDeleteData(id));
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -104,7 +104,7 @@ const HeaderBox = () => {
         <div className="configBox__message"></div>
       )}
 
-      {getSocial && getSocial.length < 5 ? (
+      {getData && getData.length < 5 ? (
         <Box className="configBox__content">
           <TextInput
             // defaultValue=""
@@ -131,8 +131,8 @@ const HeaderBox = () => {
         ""
       )}
 
-      {getSocial &&
-        getSocial.map((item) => (
+      {getData &&
+        getData.map((item) => (
           <Box key={item.id} className="configBox__content">
             <TextInput
               onChange={handleUpdateChange}

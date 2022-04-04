@@ -1,24 +1,24 @@
 import * as actionType from "./actionTypes";
 
-const getUser = (getUser) => ({
-  type: actionType.GET_USER,
-  payload: getUser,
+const getData = (getData) => ({
+  type: actionType.GET_DATA,
+  payload: getData,
 });
-const createUser = () => ({
-  type: actionType.CREATE_USER,
+const createData = () => ({
+  type: actionType.CREATE_DATA,
 });
-const updateUser = () => ({
-  type: actionType.UPDATE_USER,
+const updateData = () => ({
+  type: actionType.UPDATE_DATA,
 });
 const message = (message) => ({
-  type: actionType.USER_MESSAGE,
+  type: actionType.MESSAGE,
   payload: message,
 });
 
 const actions = {
-  getUser,
-  createUser,
-  updateUser,
+  getData,
+  createData,
+  updateData,
   message
 };
 

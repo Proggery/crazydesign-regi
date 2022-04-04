@@ -3,20 +3,20 @@ import "./share.css";
 import { ExternalLink } from "react-external-link";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadGetSocial } from "../../redux/social/reducers/thunks";
+import { loadGetData } from "../../redux/social/reducers/thunks";
 
 export default function Share() {
   const dispatch = useDispatch();
-  const { getSocial } = useSelector((state) => state.social);
+  const { getData } = useSelector((state) => state.social);
 
   useEffect(() => {
-    dispatch(loadGetSocial());
+    dispatch(loadGetData());
   }, [dispatch]);
 
   return (
     <div className="share">
-      {getSocial &&
-        getSocial.map((social) => (
+      {getData &&
+        getData.map((social) => (
           <ExternalLink key={social.id} href={social.path}>
             <div className={`share__icon ${social.class_name}`}></div>
           </ExternalLink>

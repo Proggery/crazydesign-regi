@@ -3,20 +3,20 @@ import actions from "../actions/action";
 
 const messageTimer = 2800;
 
-export const loadGetHeader = () => (dispatch) => {
+export const loadGetData = () => (dispatch) => {
   DataService()
-    .getHeader()
+    .getData()
     .then((res) => {
-      dispatch(actions.getHeader(res.data));
+      dispatch(actions.getData(res.data));
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-export const loadCreateHeader = (data) => (dispatch) => {
+export const loadCreateData = (data) => (dispatch) => {
   DataService()
-    .createHeader(data)
+    .createData(data)
     .then((res) => {
 
       if (res.error_message) {
@@ -26,17 +26,17 @@ export const loadCreateHeader = (data) => (dispatch) => {
       }
 
       setTimeout(() => {
-        dispatch(actions.message(undefined));
+        dispatch(actions.message({}));
       }, messageTimer);
-      dispatch(loadGetHeader());
+      dispatch(loadGetData());
     })
     .catch((err) => {
       console.log(err);
     });
 };
-export const loadUpdateHeader = (data, id) => (dispatch) => {
+export const loadUpdateData = (data, id) => (dispatch) => {
   DataService()
-    .updateHeader(data, id)
+    .updateData(data, id)
     .then((res) => {
 
       if (res.error_message) {
@@ -46,10 +46,10 @@ export const loadUpdateHeader = (data, id) => (dispatch) => {
       }
 
       setTimeout(() => {
-        dispatch(actions.message(undefined));
+        dispatch(actions.message({}));
       }, messageTimer);
 
-      dispatch(loadGetHeader());
+      dispatch(loadGetData());
     })
     .catch((err) => {
       console.log(err);

@@ -1,4 +1,4 @@
-export const GET_HEADER = "GET_HEADER"
-export const CREATE_HEADER = "CREATE_HEADER"
-export const UPDATE_HEADER = "UPDATE_HEADER"
-export const HEADER_MESSAGE = "HEADER_MESSAGE";
+export const GET_DATA = "GET_HEADER"
+export const CREATE_DATA = "CREATE_HEADER"
+export const UPDATE_DATA = "UPDATE_HEADER"
+export const MESSAGE = "HEADER_MESSAGE";

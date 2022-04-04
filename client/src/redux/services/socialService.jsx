@@ -1,17 +1,17 @@
 import apiClient from "../../api/apiClient";
 
-const socialService = () => {
-  const getSocial = () => apiClient().get('/getSocial');
-  const createSocial = (data) => apiClient().post(`/createSocial`, data);
-  const updateSocial = (data,id) => apiClient().put(`/updateSocial/${id}`, data);
-  const deleteSocial = (id) => apiClient().delete(`/deleteSocial/${id}`);
+const service = () => {
+  const getData = () => apiClient().get('/getSocial');
+  const createData = (data) => apiClient().post(`/createSocial`, data);
+  const updateData = (data,id) => apiClient().put(`/updateSocial/${id}`, data);
+  const deleteData = (id) => apiClient().delete(`/deleteSocial/${id}`);
 
   return {
-    getSocial,
-    createSocial,
-    updateSocial,
-    deleteSocial
+    getData,
+    createData,
+    updateData,
+    deleteData
   };
 };
 
-export default socialService;
+export default service;

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  loadGetUser,
-  loadCreateUser,
-  loadUpdateUser,
+  loadGetData,
+  loadCreateData,
+  loadUpdateData,
 } from "../../../redux/user/reducers/thunks";
 import TextInput from "../../../components/htmlElements/inputs/TextInput";
 import SendButton from "../../../components/htmlElements/buttons/SendButton";
@@ -12,7 +12,7 @@ import { showDefValue } from "../../../components/htmlElements/inputs/properties
 
 const UserBox = () => {
   const dispatch = useDispatch();
-  const { getUser, message } = useSelector((state) => state.user);
+  const { getData, message } = useSelector((state) => state.user);
 
   const [data, setData] = useState({
     title: "",
@@ -25,25 +25,25 @@ const UserBox = () => {
   const { title, subTitle } = data;
 
   useEffect(() => {
-    dispatch(loadGetUser());
+    dispatch(loadGetData());
   }, [dispatch]);
 
   useEffect(() => {
-    if (getUser) {
-      if (getUser[0]) {
+    if (getData) {
+      if (getData[0]) {
         setInputChange(false);
 
         setData({
           ...data,
-          title: getUser[0].title,
-          subTitle: getUser[0].sub_title,
+          title: getData[0].title,
+          subTitle: getData[0].sub_title,
         });
       }
     } else {
       setInputChange(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getUser]);
+  }, [getData]);
 
   useEffect(() => {
     setResMessage(message);
@@ -55,13 +55,13 @@ const UserBox = () => {
   };
 
   const handleSubmit = () => {
-    dispatch(loadCreateUser(data));
-    dispatch(loadGetUser());
+    dispatch(loadCreateData(data));
+    dispatch(loadGetData());
   };
 
   const handleUpdate = (e, id) => {
     e.preventDefault();
-    dispatch(loadUpdateUser(data, id));
+    dispatch(loadUpdateData(data, id));
   };
 
   const titleInputProps = {
@@ -116,8 +116,8 @@ const UserBox = () => {
           <SendButton {...submitButtonProps} />
         </div>
       ) : (
-        getUser &&
-        getUser.map((item, key) => (
+        getData &&
+        getData.map((item, key) => (
           <div className="configBox__content" key={key}>
             <TextInput defaultValue={title} {...titleInputProps} />
 

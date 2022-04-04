@@ -1,24 +1,24 @@
 import * as actionType from "./actionTypes";
 
-const getHeader = (getHeader) => ({
-  type: actionType.GET_HEADER,
-  payload: getHeader,
+const getData = (getData) => ({
+  type: actionType.GET_DATA,
+  payload: getData,
 });
-const createHeader = () => ({
-  type: actionType.CREATE_HEADER,
+const createData = () => ({
+  type: actionType.CREATE_DATA,
 });
-const updateHeader = () => ({
-  type: actionType.UPDATE_HEADER,
+const updateData = () => ({
+  type: actionType.UPDATE_DATA,
 });
 const message = (message) => ({
-  type: actionType.HEADER_MESSAGE,
+  type: actionType.MESSAGE,
   payload: message,
 });
 
 const actions = {
-  getHeader,
-  createHeader,
-  updateHeader,
+  getData,
+  createData,
+  updateData,
   message
 };
 

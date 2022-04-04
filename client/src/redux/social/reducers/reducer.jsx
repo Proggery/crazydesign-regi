@@ -3,22 +3,22 @@ import initialState from "./initialState";
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case actionType.GET_SOCIAL:
+    case actionType.GET_DATA:
       return {
         ...state,
-        getSocial: payload,
+        getData: payload,
       };
-    case actionType.CREATE_SOCIAL:
-    case actionType.UPDATE_SOCIAL:
-    case actionType.DELETE_SOCIAL:
+    case actionType.CREATE_DATA:
+    case actionType.UPDATE_DATA:
+    case actionType.DELETE_DATA:
       return {
         ...state,
       };
-    case actionType.SOCIAL_MESSAGE:
-      return {
-        ...state,
-        message: payload,
-      };
+      case actionType.MESSAGE:
+        return {
+          ...state,
+          message: payload,
+        };
 
     default:
       return state;

@@ -1,29 +1,29 @@
 import * as actionType from "./actionTypes";
 
-const getSocial = (getSocial) => ({
-  type: actionType.GET_SOCIAL,
-  payload: getSocial,
+const getData = (getData) => ({
+  type: actionType.GET_DATA,
+  payload: getData,
 });
-const createSocial = () => ({
-  type: actionType.CREATE_SOCIAL,
+const createData = () => ({
+  type: actionType.CREATE_DATA,
 });
-const updateSocial = () => ({
-  type: actionType.UPDATE_SOCIAL,
+const updateData = () => ({
+  type: actionType.UPDATE_DATA,
 });
-const deleteSocial = () => ({
-  type: actionType.DELETE_SOCIAL,
+const deleteData = () => ({
+  type: actionType.DELETE_DATA,
 });
 const message = (message) => ({
-  type: actionType.SOCIAL_MESSAGE,
+  type: actionType.MESSAGE,
   payload: message,
 });
 
 const actions = {
-  getSocial,
-  createSocial,
-  updateSocial,
-  deleteSocial,
-  message,
+  getData,
+  createData,
+  updateData,
+  deleteData,
+  message
 };
 
 export default actions;

@@ -3,20 +3,20 @@ import actions from "../actions/action";
 
 const messageTimer = 2800;
 
-export const loadGetUser = () => (dispatch) => {
+export const loadGetData = () => (dispatch) => {
   DataService()
-    .getUser()
+    .getData()
     .then((res) => {
-      dispatch(actions.getUser(res.data));
+      dispatch(actions.getData(res.data));
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-export const loadCreateUser = (data) => (dispatch) => {
+export const loadCreateData = (data) => (dispatch) => {
   DataService()
-    .createUser(data)
+    .createData(data)
     .then((res) => {
       if (res.error_message) {
         dispatch(actions.message(res.data));
@@ -27,15 +27,15 @@ export const loadCreateUser = (data) => (dispatch) => {
       setTimeout(() => {
         dispatch(actions.message({}));
       }, messageTimer);
-      dispatch(loadGetUser());
+      dispatch(loadGetData());
     })
     .catch((err) => {
       console.log(err);
     });
 };
-export const loadUpdateUser = (data, id) => (dispatch) => {
+export const loadUpdateData = (data, id) => (dispatch) => {
   DataService()
-    .updateUser(data, id)
+    .updateData(data, id)
     .then((res) => {
       if (res.error_message) {
         dispatch(actions.message(res.data));
@@ -47,7 +47,7 @@ export const loadUpdateUser = (data, id) => (dispatch) => {
         dispatch(actions.message({}));
       }, messageTimer);
 
-      dispatch(loadGetUser());
+      dispatch(loadGetData());
     })
     .catch((err) => {
       console.log(err);

@@ -1,4 +1,4 @@
-export const GET_USER = "GET_USER"
-export const CREATE_USER = "CREATE_USER"
-export const UPDATE_USER = "UPDATE_USER"
-export const USER_MESSAGE = "USER_MESSAGE";
+export const GET_DATA= "GET_USER"
+export const CREATE_DATA= "CREATE_USER"
+export const UPDATE_DATA= "UPDATE_USER"
+export const MESSAGE = "USER_MESSAGE";

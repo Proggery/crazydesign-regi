@@ -3,20 +3,20 @@ import actions from "../actions/action";
 
 const messageTimer = 2700;
 
-export const loadGetSocial = () => (dispatch) => {
+export const loadGetData = () => (dispatch) => {
   DataService()
-    .getSocial()
+    .getData()
     .then((res) => {
-      dispatch(actions.getSocial(res.data));
+      dispatch(actions.getData(res.data));
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-export const loadCreateSocial = (data) => (dispatch) => {
+export const loadCreateData = (data) => (dispatch) => {
   DataService()
-    .createSocial(data)
+    .createData(data)
     .then((res) => {
       if (res.data.error_message) {
         dispatch(actions.message(res.data));
@@ -28,16 +28,16 @@ export const loadCreateSocial = (data) => (dispatch) => {
         dispatch(actions.message(undefined));
       }, messageTimer);
 
-      dispatch(loadGetSocial());
+      dispatch(loadGetData());
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-export const loadUpdateSocial = (data, id) => (dispatch) => {
+export const loadUpdateData = (data, id) => (dispatch) => {
   DataService()
-    .updateSocial(data, id)
+    .updateData(data, id)
     .then((res) => {
       console.log("sikeres módosítás");
       if (res.data.success_message) {
@@ -48,16 +48,16 @@ export const loadUpdateSocial = (data, id) => (dispatch) => {
         dispatch(actions.message({}));
       }, messageTimer);
 
-      dispatch(loadGetSocial());
+      dispatch(loadGetData());
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-export const loadDeleteSocial = (id) => (dispatch) => {
+export const loadDeleteData = (id) => (dispatch) => {
   DataService()
-    .deleteSocial(id)
+    .deleteData(id)
     .then((res) => {
       console.log("sikeres törlés");
       if (res.data.success_message) {
@@ -68,7 +68,7 @@ export const loadDeleteSocial = (id) => (dispatch) => {
         dispatch(actions.message({}));
       }, messageTimer);
 
-      dispatch(loadGetSocial());
+      dispatch(loadGetData());
     })
     .catch((err) => {
       console.log(err);

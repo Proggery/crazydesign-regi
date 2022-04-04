@@ -1,15 +1,15 @@
 import apiClient from "../../api/apiClient";
 
-const userService = () => {
-  const getUser = () => apiClient().get('/getUser');
-  const createUser = (data) => apiClient().post(`/createUser`, data);
-  const updateUser = (data,id) => apiClient().put(`/updateUser/${id}`, data);
+const service = () => {
+  const getData= () => apiClient().get('/getUser');
+  const createData= (data) => apiClient().post(`/createUser`, data);
+  const updateData= (data,id) => apiClient().put(`/updateUser/${id}`, data);
 
   return {
-    getUser,
-    createUser,
-    updateUser
+    getData,
+    createData,
+    updateData
   };
 };
 
-export default userService;
+export default service;
