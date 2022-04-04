@@ -1,24 +1,23 @@
-import DataService from "../../services/headerService";
+import DataService from "../../services/userService";
 import actions from "../actions/action";
 
 const messageTimer = 2800;
 
-export const loadGetHeader = () => (dispatch) => {
+export const loadGetUser = () => (dispatch) => {
   DataService()
-    .getHeader()
+    .getUser()
     .then((res) => {
-      dispatch(actions.getHeader(res.data));
+      dispatch(actions.getUser(res.data));
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-export const loadCreateHeader = (data) => (dispatch) => {
+export const loadCreateUser = (data) => (dispatch) => {
   DataService()
-    .createHeader(data)
+    .createUser(data)
     .then((res) => {
-
       if (res.error_message) {
         dispatch(actions.message(res.data));
       } else {
@@ -26,19 +25,18 @@ export const loadCreateHeader = (data) => (dispatch) => {
       }
 
       setTimeout(() => {
-        dispatch(actions.message(undefined));
+        dispatch(actions.message({}));
       }, messageTimer);
-      dispatch(loadGetHeader());
+      dispatch(loadGetUser());
     })
     .catch((err) => {
       console.log(err);
     });
 };
-export const loadUpdateHeader = (data, id) => (dispatch) => {
+export const loadUpdateUser = (data, id) => (dispatch) => {
   DataService()
-    .updateHeader(data, id)
+    .updateUser(data, id)
     .then((res) => {
-
       if (res.error_message) {
         dispatch(actions.message(res.data));
       } else {
@@ -46,10 +44,10 @@ export const loadUpdateHeader = (data, id) => (dispatch) => {
       }
 
       setTimeout(() => {
-        dispatch(actions.message(undefined));
+        dispatch(actions.message({}));
       }, messageTimer);
 
-      dispatch(loadGetHeader());
+      dispatch(loadGetUser());
     })
     .catch((err) => {
       console.log(err);

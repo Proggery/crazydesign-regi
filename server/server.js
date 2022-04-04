@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const headerRouter = require("./routers/headerRouter");
 const socialRouter = require("./routers/socialRouter");
 const uploadFileRouter = require("./routers/uploadFileRouter");
+const userRouter = require("./routers/userRouter");
 require("dotenv").config();
 
 app.use(cors());
@@ -18,6 +19,11 @@ app.use("/static", express.static("images"));
 app.use("", headerRouter);
 app.use("", socialRouter);
 app.use("", uploadFileRouter);
+app.use("", userRouter);
+
+app.get("/", (req, res) => {
+  res.send("sikeres csatlakozás");
+});
 
 app.listen(port, () => {
   console.log(`A szerver fut: ${port}`);

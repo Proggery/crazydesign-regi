@@ -14,15 +14,10 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
       };
-    case actionType.MESSAGE:
+    case actionType.SOCIAL_MESSAGE:
       return {
         ...state,
         message: payload,
-      };
-    case actionType.IS_FULL:
-      return {
-        ...state,
-        isFull: true,
       };
 
     default:

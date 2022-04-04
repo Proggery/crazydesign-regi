@@ -28,3 +28,9 @@ model upload_images {
   img_alt  String? @db.VarChar(45)
   img_name String? @db.VarChar(45)
 }
+
+model user_config {
+  id        Int     @id @default(autoincrement())
+  title     String? @db.VarChar(45)
+  sub_title String? @db.VarChar(45)
+}

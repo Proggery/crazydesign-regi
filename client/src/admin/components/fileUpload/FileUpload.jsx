@@ -10,7 +10,7 @@ const Input = styled("input")({
   display: "none",
 });
 
-const FileUpload = () => {
+const FileUpload = (props) => {
   const dispatch = useDispatch();
   const { fileUpload } = useSelector((state) => state.fileUpload);
 
@@ -38,9 +38,13 @@ const FileUpload = () => {
     formData.append("alt", alt);
 
     dispatch(loadFileUpload(formData));
+    setFile("")
+    setFilename("");
+    setAlt("");
   };
 
   const deleteFileName = () => {
+    setFile("")
     setFilename("");
     setAlt("");
   };
@@ -71,14 +75,6 @@ const FileUpload = () => {
               id="icon-button-file"
               type="file"
             />
-            <TextField
-              id="standard-basic"
-              label="kép leírás"
-              variant="standard"
-              onChange={(e) => setAlt(e.target.value)}
-              value={alt}
-            />
-
             <IconButton
               color="primary"
               aria-label="upload picture"
@@ -87,6 +83,13 @@ const FileUpload = () => {
               <PhotoCamera />
             </IconButton>
           </label>
+          <TextField
+              id="standard-basic"
+              label="kép leírás"
+              variant="standard"
+              onChange={(e) => setAlt(e.target.value)}
+              value={alt}
+            />
         </Stack>
         <Button variant="outlined" type="submit" value="Feltölt">
           Feltölt

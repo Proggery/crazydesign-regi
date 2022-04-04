@@ -25,7 +25,6 @@ const HeaderBox = () => {
 
   const [data, setData] = useState({});
   const [updateData, setUpdateData] = useState({});
-
   const [resMessage, setResMessage] = useState({});
 
   useEffect(() => {
@@ -83,8 +82,6 @@ const HeaderBox = () => {
 
   const open = Boolean(anchorEl);
 
-  console.log(data.socialPath);
-
   return (
     <Box
       id="share__box"
@@ -99,39 +96,40 @@ const HeaderBox = () => {
       <div className="configBox__header">
         <h2>Social média beállítás</h2>
       </div>
+      {resMessage && resMessage ? (
+        <div className="configBox__message">
+          {resMessage.error_message || resMessage.success_message}
+        </div>
+      ) : (
+        <div className="configBox__message"></div>
+      )}
 
-      {resMessage && resMessage.error_message}
-      {resMessage && resMessage.success_message}
-
-      <Box
-        // sx={
-        //   getSocial && getSocial.length === 5
-        //     ? { display: "none" }
-        //     : { display: "unset" }
-        // }
-        className="configBox__content"
-      >
-        <TextInput
-          // defaultValue=""
-          onChange={handleChange}
-          {...socialCreatePathProps}
-        />
-        <TextInput
-          // defaultValue=""
-          onChange={handleChange}
-          {...socialCreateClassProps}
-        />
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          className="submit__button"
-        >
-          <Check onClick={handleSubmit} {...submitButtonProps} />
+      {getSocial && getSocial.length < 5 ? (
+        <Box className="configBox__content">
+          <TextInput
+            // defaultValue=""
+            onChange={handleChange}
+            {...socialCreatePathProps}
+          />
+          <TextInput
+            // defaultValue=""
+            onChange={handleChange}
+            {...socialCreateClassProps}
+          />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            className="submit__button"
+          >
+            <Check onClick={handleSubmit} {...submitButtonProps} />
+          </Box>
         </Box>
-      </Box>
+      ) : (
+        ""
+      )}
 
       {getSocial &&
         getSocial.map((item) => (

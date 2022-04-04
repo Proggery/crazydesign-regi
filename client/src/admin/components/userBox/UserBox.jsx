@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  loadGetHeader,
-  loadCreateHeader,
-  loadUpdateHeader,
-} from "../../../redux/header/reducers/thunks";
+  loadGetUser,
+  loadCreateUser,
+  loadUpdateUser,
+} from "../../../redux/user/reducers/thunks";
 import TextInput from "../../../components/htmlElements/inputs/TextInput";
 import SendButton from "../../../components/htmlElements/buttons/SendButton";
 import { showDefValue } from "../../../components/htmlElements/inputs/properties";
 
-const HeaderBox = () => {
+const UserBox = () => {
   const dispatch = useDispatch();
-  const { getHeader, message } = useSelector((state) => state.header);
+  const { getUser, message } = useSelector((state) => state.user);
 
   const [data, setData] = useState({
     title: "",
@@ -25,25 +25,25 @@ const HeaderBox = () => {
   const { title, subTitle } = data;
 
   useEffect(() => {
-    dispatch(loadGetHeader());
+    dispatch(loadGetUser());
   }, [dispatch]);
 
   useEffect(() => {
-    if (getHeader) {
-      if (getHeader[0]) {
+    if (getUser) {
+      if (getUser[0]) {
         setInputChange(false);
 
         setData({
           ...data,
-          title: getHeader[0].title,
-          subTitle: getHeader[0].sub_title,
+          title: getUser[0].title,
+          subTitle: getUser[0].sub_title,
         });
       }
     } else {
       setInputChange(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getHeader]);
+  }, [getUser]);
 
   useEffect(() => {
     setResMessage(message);
@@ -55,13 +55,13 @@ const HeaderBox = () => {
   };
 
   const handleSubmit = () => {
-    dispatch(loadCreateHeader(data));
-    dispatch(loadGetHeader());
+    dispatch(loadCreateUser(data));
+    dispatch(loadGetUser());
   };
 
   const handleUpdate = (e, id) => {
     e.preventDefault();
-    dispatch(loadUpdateHeader(data, id));
+    dispatch(loadUpdateUser(data, id));
   };
 
   const titleInputProps = {
@@ -98,7 +98,7 @@ const HeaderBox = () => {
       className="configBox"
     >
       <div className="configBox__header">
-        <h2>Fejléc beállítás</h2>
+        <h2>Felhasználó beállítás</h2>
       </div>
 
       {resMessage && resMessage ? (
@@ -116,8 +116,8 @@ const HeaderBox = () => {
           <SendButton {...submitButtonProps} />
         </div>
       ) : (
-        getHeader &&
-        getHeader.map((item, key) => (
+        getUser &&
+        getUser.map((item, key) => (
           <div className="configBox__content" key={key}>
             <TextInput defaultValue={title} {...titleInputProps} />
 
@@ -134,4 +134,4 @@ const HeaderBox = () => {
   );
 };
 
-export default HeaderBox;
+export default UserBox;

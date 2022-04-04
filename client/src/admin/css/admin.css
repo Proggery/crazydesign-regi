@@ -15,7 +15,11 @@
 
 #admin .admin__content .configBox .configBox__header {
   text-align: center;
-  padding-bottom: 3rem;
+}
+
+#admin .admin__content .configBox .configBox__message {
+  padding: 1rem 0;
+  line-height: 0;
 }
 
 #admin .admin__content .configBox .configBox__content {

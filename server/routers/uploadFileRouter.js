@@ -6,9 +6,18 @@ const images = multer({ dest: "images/" });
 const { rename } = require("fs");
 
 router.post("/createFileUpload", images.single("avatar"), async (req, res) => {
+  if (!req.file) {
+    return console.log({ error_message: "Nincs kép kiválasztva!" });
+  }
+
   let fileType = req.file.mimetype.split("/")[1];
+
+  if (fileType === "svg+xml") {
+    fileType = fileType.split("+")[0];
+  }
+
   let newFileName = req.file.filename + "." + fileType;
-  const {alt} = req.body
+  const { alt } = req.body;
 
   rename(`images/${req.file.filename}`, `images/${newFileName}`, (err) => {
     if (err) throw err;
@@ -22,7 +31,7 @@ router.post("/createFileUpload", images.single("avatar"), async (req, res) => {
     },
   });
   res.json({
-    msg: "sikeres fájlfeltöltés!",
+    success_message: "Sikeres képfeltöltés!",
   });
 });
 

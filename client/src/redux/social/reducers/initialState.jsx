@@ -2,7 +2,6 @@ const initialState = () => {
   return {
     getSocial: [],
     message: {},
-    isFull: false,
   };
 };
 

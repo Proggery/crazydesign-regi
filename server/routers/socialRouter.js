@@ -17,7 +17,7 @@ router.post("/createSocial", async (req, res) => {
   const { socialPath, socialClass } = req.body;
 
   if (!socialPath) {
-    return res.send({ error_message: "az útvonal megadása kötelező!" });
+    return res.send({ error_message: "Az útvonal megadása kötelező!" });
   } else {
     const exsistsData = await social_config.findUnique({
       where: {
@@ -25,7 +25,7 @@ router.post("/createSocial", async (req, res) => {
       },
     });
     if (exsistsData) {
-      return res.send({ error_message: "létezik" });
+      return res.send({ error_message: "Az útvonal létezik!" });
     } else {
       const createSocialData = await social_config.create({
         data: {
@@ -34,7 +34,7 @@ router.post("/createSocial", async (req, res) => {
         },
       });
 
-      res.send({ success_message: "létrehozva!", createSocialData });
+      res.send({ success_message: "Social icon létrehozva!", createSocialData });
     }
   }
 });
@@ -43,11 +43,14 @@ router.put("/updateSocial/:id", async (req, res) => {
   const id = parseInt(req.params.id);
   const { socialPath } = req.body;
 
-  await social_config.update({
-    where: { id: id },
-    data: { path: socialPath },
-  });
-  res.send({ success_message: "sikeres módosítás!" });
+  if (socialPath) {
+    await social_config.update({
+      where: { id: id },
+      data: { path: socialPath },
+    });
+    res.send({ success_message: "Social icon módosítva!" });
+  }
+
 });
 
 router.delete("/deleteSocial/:id", async (req, res) => {
@@ -56,7 +59,7 @@ router.delete("/deleteSocial/:id", async (req, res) => {
   await social_config.delete({
     where: { id: id },
   });
-  res.send({ success_message: "sikeres törlés!" });
+  res.send({ success_message: "Social icon törölve!" });
 });
 
 module.exports = router;

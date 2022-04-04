@@ -1,12 +1,10 @@
 import * as React from "react";
 import "./css/admin.css";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import { styled } from "@mui/material/styles";
+import { styled, Paper, Box, Container } from "@mui/material";
 import HeaderBox from "./components/headerBox/HeaderBox";
 import ShareBox from "./components/shareBox/ShareBox";
-import { Container } from "@mui/material";
 import FileUpload from "./components/fileUpload/FileUpload";
+import UserBox from "./components/userBox/UserBox";
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -26,6 +24,9 @@ const Admin = () => {
         </Item>
         <Item className="" sx={{ p: "30px" }}>
           <FileUpload />
+        </Item>
+        <Item className="" sx={{ p: "30px" }}>
+          <UserBox />
         </Item>
       </Box>
     </Container>

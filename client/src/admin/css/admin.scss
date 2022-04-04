@@ -15,7 +15,11 @@
     .configBox {
       .configBox__header {
         text-align: center;
-        padding-bottom: 3rem;
+      }
+      .configBox__message {
+        padding: 1rem 0;
+        line-height: 0;
+
       }
       .configBox__content {
         width: 100%;

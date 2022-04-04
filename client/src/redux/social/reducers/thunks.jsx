@@ -1,7 +1,7 @@
 import DataService from "../../services/socialService";
 import actions from "../actions/action";
 
-const messageTimer = 2500;
+const messageTimer = 2700;
 
 export const loadGetSocial = () => (dispatch) => {
   DataService()
@@ -25,7 +25,7 @@ export const loadCreateSocial = (data) => (dispatch) => {
       }
 
       setTimeout(() => {
-        dispatch(actions.message(""));
+        dispatch(actions.message(undefined));
       }, messageTimer);
 
       dispatch(loadGetSocial());
@@ -45,7 +45,7 @@ export const loadUpdateSocial = (data, id) => (dispatch) => {
       }
 
       setTimeout(() => {
-        dispatch(actions.message(""));
+        dispatch(actions.message({}));
       }, messageTimer);
 
       dispatch(loadGetSocial());
@@ -63,9 +63,9 @@ export const loadDeleteSocial = (id) => (dispatch) => {
       if (res.data.success_message) {
         dispatch(actions.message(res.data));
       }
-      
+
       setTimeout(() => {
-        dispatch(actions.message(""));
+        dispatch(actions.message({}));
       }, messageTimer);
 
       dispatch(loadGetSocial());

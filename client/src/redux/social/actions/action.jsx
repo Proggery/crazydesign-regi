@@ -14,12 +14,8 @@ const deleteSocial = () => ({
   type: actionType.DELETE_SOCIAL,
 });
 const message = (message) => ({
-  type: actionType.MESSAGE,
+  type: actionType.SOCIAL_MESSAGE,
   payload: message,
-});
-const isFull = (isFull) => ({
-  type: actionType.IS_FULL,
-  payload: isFull,
 });
 
 const actions = {
@@ -28,7 +24,6 @@ const actions = {
   updateSocial,
   deleteSocial,
   message,
-  isFull,
 };
 
 export default actions;
