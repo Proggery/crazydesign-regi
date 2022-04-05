@@ -3,7 +3,7 @@ import React from "react";
 
 const SendButton = (props) => {
   return (
-    <Button onClick={props.onClick} variant={props.variant}>
+    <Button type={props.type} onClick={props.onClick} variant={props.variant}>
       {props.value}
     </Button>
   );

@@ -1,28 +1,35 @@
 import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
+import { Box, IconButton, Stack, styled, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadGetData,
   loadCreateData,
   loadUpdateData,
+  loadDeleteData
 } from "../../../redux/user/reducers/thunks";
 import TextInput from "../../../components/htmlElements/inputs/TextInput";
 import SendButton from "../../../components/htmlElements/buttons/SendButton";
 import { showDefValue } from "../../../components/htmlElements/inputs/properties";
+import { Delete, PhotoCamera } from "@mui/icons-material";
+
+const Input = styled("input")({
+  display: "none",
+});
 
 const UserBox = () => {
   const dispatch = useDispatch();
   const { getData, message } = useSelector((state) => state.user);
 
   const [data, setData] = useState({
-    title: "",
-    subTitle: "",
+    name: "",
+    desc: "",
+    alt: "",
+    file: "",
+    filename: "",
   });
   const [inputChange, setInputChange] = useState(true);
-
   const [resMessage, setResMessage] = useState({});
-
-  const { title, subTitle } = data;
+  const { name, desc, alt } = data;
 
   useEffect(() => {
     dispatch(loadGetData());
@@ -35,8 +42,8 @@ const UserBox = () => {
 
         setData({
           ...data,
-          title: getData[0].title,
-          subTitle: getData[0].sub_title,
+          name: getData[0].name,
+          desc: getData[0].desc,
         });
       }
     } else {
@@ -51,35 +58,92 @@ const UserBox = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setData({ ...data, [name]: value });
+
+    setData({
+      ...data,
+      [name]: value,
+    });
   };
 
-  const handleSubmit = () => {
-    dispatch(loadCreateData(data));
+  const handleFileUpload = (e) => {
+    setData({
+      ...data,
+      file: e.target.files[0],
+      filename: e.target.files[0].name,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("profileImg", data.file);
+    formData.append("name", name);
+    formData.append("desc", desc);
+    formData.append("alt", alt);
+
+    dispatch(loadCreateData(formData));
     dispatch(loadGetData());
+    setData({
+      name: "",
+      desc: "",
+      alt: "",
+      file: "",
+      filename: "",
+    });
   };
 
   const handleUpdate = (e, id) => {
     e.preventDefault();
-    dispatch(loadUpdateData(data, id));
+
+    const formData = new FormData();
+    formData.append("profileImg", data.file);
+    formData.append("name", name);
+    formData.append("desc", desc);
+    formData.append("alt", alt);
+
+    dispatch(loadUpdateData(formData, id));
+
+    setData({
+      ...data,
+      file: "",
+      filename: "",
+    });
   };
 
-  const titleInputProps = {
+  const deleteFileName = () => {
+    setData({
+      ...data,
+      file: "",
+      filename: "",
+    });
+  };
+
+  const deleteProfileImg = (id) => {
+    dispatch(loadDeleteData(id));
+  }
+
+  const nameInputProps = {
     label: "Név",
-    name: "title",
+    name: "name",
     onChange: handleChange,
     variant: "standard",
   };
 
-  const subTitleInputProps = {
-    ...titleInputProps,
-    name: "subTitle",
+  const descInputProps = {
+    ...nameInputProps,
+    name: "desc",
     label: "Alszöveg",
+  };
+  const altInputProps = {
+    ...nameInputProps,
+    name: "alt",
+    label: "kép leírás",
   };
   const submitButtonProps = {
     value: "Létrehoz",
-    onClick: handleSubmit,
     variant: "contained",
+    type: "submit",
   };
   const updateButtonProps = {
     value: "Módosít",
@@ -88,15 +152,7 @@ const UserBox = () => {
   };
 
   return (
-    <Box
-      component="form"
-      sx={{
-        "& > :not(style)": { m: 1 },
-      }}
-      noValidate
-      autoComplete="off"
-      className="configBox"
-    >
+    <>
       <div className="configBox__header">
         <h2>Felhasználó beállítás</h2>
       </div>
@@ -108,29 +164,133 @@ const UserBox = () => {
       ) : (
         <div className="configBox__message"></div>
       )}
-
-      {inputChange ? (
-        <div className="configBox__content">
-          <TextInput {...titleInputProps} />
-          <TextInput {...subTitleInputProps} />
-          <SendButton {...submitButtonProps} />
-        </div>
-      ) : (
-        getData &&
-        getData.map((item, key) => (
-          <div className="configBox__content" key={key}>
-            <TextInput defaultValue={title} {...titleInputProps} />
-
-            <TextInput
-              showDefValue={showDefValue}
-              defaultValue={subTitle}
-              {...subTitleInputProps}
-            />
-            <SendButton {...updateButtonProps} />
+      <Box
+        sx={{
+          "& > :not(style)": { m: 1 },
+        }}
+        noValidate
+        autoComplete="off"
+        className="configBox"
+      >
+        {inputChange ? (
+          <div className="configBox__content">
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              method="POST"
+              noValidate
+              autoComplete="off"
+            >
+              <Stack direction="row" alignItems="center" spacing={2}>
+                {data.filename && (
+                  <div>
+                    {data.filename}
+                    <IconButton
+                      color="primary"
+                      aria-label="delete picture"
+                      component="span"
+                      onClick={deleteFileName}
+                    >
+                      <Delete />
+                    </IconButton>
+                  </div>
+                )}
+              </Stack>
+              <Stack direction="row" alignItems="center" spacing={2}>
+                <label htmlFor="profile__img">
+                  <Input
+                    onChange={handleFileUpload}
+                    accept="image/*"
+                    id="profile__img"
+                    type="file"
+                  />
+                  <IconButton
+                    color="primary"
+                    aria-label="upload picture"
+                    component="span"
+                  >
+                    <PhotoCamera />
+                  </IconButton>
+                </label>
+                <TextInput {...altInputProps} />
+              </Stack>
+              <TextInput {...nameInputProps} />
+              <TextInput {...descInputProps} />
+              <SendButton {...submitButtonProps} />
+            </Box>
           </div>
-        ))
-      )}
-    </Box>
+        ) : (
+          getData &&
+          getData.map((item) => (
+            <div className="configBox__content" key={item.id}>
+              {item.img_name ? (
+                <div>
+                  <img
+                    width="100"
+                    src={`http://localhost:5555/static/images/profile-img/${item.img_name}`}
+                    alt=""
+                  />
+
+                  <IconButton
+                    color="primary"
+                    aria-label="delete picture"
+                    component="span"
+                    onClick={()=>deleteProfileImg(item.id)}
+                  >
+                    <Delete />
+                  </IconButton>
+                </div>
+              ) : (
+                <>
+                  <Stack direction="row" alignItems="center" spacing={2}>
+                    {data.filename && (
+                      <div>
+                        {data.filename}
+                        <IconButton
+                          color="primary"
+                          aria-label="delete picture"
+                          component="span"
+                          onClick={deleteFileName}
+                        >
+                          <Delete />
+                        </IconButton>
+                      </div>
+                    )}
+                  </Stack>
+                  <Stack direction="row" alignItems="center" spacing={2}>
+                    <label htmlFor="profile__img">
+                      <Input
+                        onChange={handleFileUpload}
+                        accept="image/*"
+                        id="profile__img"
+                        type="file"
+                      />
+                      <IconButton
+                        color="primary"
+                        aria-label="upload picture"
+                        component="span"
+                      >
+                        <PhotoCamera />
+                      </IconButton>
+                    </label>
+                    <TextInput {...altInputProps} />
+                  </Stack>
+                </>
+              )}
+
+              <TextInput defaultValue={name} {...nameInputProps} />
+
+              <TextInput
+                showDefValue={showDefValue}
+                defaultValue={desc}
+                {...descInputProps}
+              />
+              <SendButton {...updateButtonProps} />
+            </div>
+          ))
+        )}
+      </Box>
+    </>
   );
 };
 

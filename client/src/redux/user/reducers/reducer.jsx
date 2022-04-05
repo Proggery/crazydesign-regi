@@ -10,6 +10,7 @@ const reducer = (state = initialState, { type, payload }) => {
       };
     case actionType.CREATE_DATA:
     case actionType.UPDATE_DATA:
+    case actionType.DELETE_DATA:
       return {
         ...state,
       };

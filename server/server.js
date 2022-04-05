@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(bodyParser());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/static", express.static("images"));
+app.use("/static", express.static("uploads"));
 
 app.use("", headerRouter);
 app.use("", socialRouter);

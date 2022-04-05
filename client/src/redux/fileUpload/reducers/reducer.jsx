@@ -3,10 +3,19 @@ import initialState from "./initialState";
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case actionType.FILE_UPLOAD:
+    case actionType.CREATE_DATA:
       return {
         ...state,
-        fileUpload: payload,
+        getData: payload,
+      };
+    case actionType.DELETE_DATA:
+      return {
+        ...state,
+      };
+    case actionType.MESSAGE:
+      return {
+        ...state,
+        message: payload,
       };
 
     default:

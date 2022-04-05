@@ -53,3 +53,23 @@ export const loadUpdateData = (data, id) => (dispatch) => {
       console.log(err);
     });
 };
+export const loadDeleteData = (id) => (dispatch) => {
+  DataService()
+    .deleteData(id)
+    .then((res) => {
+      if (res.error_message) {
+        dispatch(actions.message(res.data));
+      } else {
+        dispatch(actions.message(res.data));
+      }
+
+      setTimeout(() => {
+        dispatch(actions.message({}));
+      }, messageTimer);
+
+      dispatch(loadGetData());
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

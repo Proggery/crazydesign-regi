@@ -1,6 +1,7 @@
 const initialState = () => {
   return {
-    fileUpload: [],
+    getData: [],
+    message: "",
   };
 };
 

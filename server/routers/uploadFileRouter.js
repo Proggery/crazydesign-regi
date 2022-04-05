@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { PrismaClient } = require("@prisma/client");
 const { upload_images } = new PrismaClient();
 const multer = require("multer");
-const images = multer({ dest: "images/" });
+const images = multer({ dest: "uploads/images/" });
 const { rename } = require("fs");
 
 router.post("/createFileUpload", images.single("avatar"), async (req, res) => {

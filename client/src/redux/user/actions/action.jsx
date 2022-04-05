@@ -10,6 +10,9 @@ const createData = () => ({
 const updateData = () => ({
   type: actionType.UPDATE_DATA,
 });
+const deleteData = () => ({
+  type: actionType.DELETE_DATA,
+});
 const message = (message) => ({
   type: actionType.MESSAGE,
   payload: message,
@@ -19,6 +22,7 @@ const actions = {
   getData,
   createData,
   updateData,
+  deleteData,
   message
 };
 

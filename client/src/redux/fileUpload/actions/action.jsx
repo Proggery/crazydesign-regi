@@ -1,12 +1,23 @@
 import * as actionType from "./actionTypes";
 
-const fileUpload = (fileUpload) => ({
-  type: actionType.FILE_UPLOAD,
-  payload: fileUpload,
+const createData = (getData) => ({
+  type: actionType.CREATE_DATA,
+  payload: getData,
+});
+
+const deleteData = () => ({
+  type: actionType.DELETE_DATA,
+});
+
+const message = (message) => ({
+  type: actionType.MESSAGE,
+  payload: message,
 });
 
 const actions = {
-  fileUpload,
+  createData,
+  deleteData,
+  message,
 };
 
 export default actions;

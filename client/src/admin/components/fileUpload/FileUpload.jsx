@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { styled } from "@mui/material/styles";
-import { Button, IconButton, Stack, TextField } from "@mui/material";
+import { Box, Button, IconButton, Stack, TextField } from "@mui/material";
 import { PhotoCamera, Delete } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { loadFileUpload } from "../../../redux/fileUpload/reducers/thunks";
@@ -10,20 +10,20 @@ const Input = styled("input")({
   display: "none",
 });
 
-const FileUpload = (props) => {
+const FileUpload = () => {
   const dispatch = useDispatch();
-  const { fileUpload } = useSelector((state) => state.fileUpload);
+  const { createData } = useSelector((state) => state.fileUpload);
 
   const [file, setFile] = useState("");
   const [filename, setFilename] = useState("");
   const [alt, setAlt] = useState("");
-  // const [uploadFile, setUploadFile] = useState({});
+  const [uploadFile, setUploadFile] = useState({});
 
   useEffect(() => {
-    if (fileUpload) {
-      // setUploadFile(fileUpload);
+    if (createData) {
+      setUploadFile(createData);
     }
-  }, [fileUpload]);
+  }, [createData]);
 
   const handleChange = (e) => {
     setFile(e.target.files[0]);
@@ -38,20 +38,26 @@ const FileUpload = (props) => {
     formData.append("alt", alt);
 
     dispatch(loadFileUpload(formData));
-    setFile("")
+    setFile("");
     setFilename("");
     setAlt("");
   };
 
   const deleteFileName = () => {
-    setFile("")
+    setFile("");
     setFilename("");
     setAlt("");
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit} method="POST">
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        method="POST"
+        noValidate
+        autoComplete="off"
+      >
         <Stack direction="row" alignItems="center" spacing={2}>
           {filename && (
             <div>
@@ -68,11 +74,11 @@ const FileUpload = (props) => {
           )}
         </Stack>
         <Stack direction="row" alignItems="center" spacing={2}>
-          <label htmlFor="icon-button-file">
+          <label htmlFor="file__upload">
             <Input
               onChange={handleChange}
               accept="image/*"
-              id="icon-button-file"
+              id="file__upload"
               type="file"
             />
             <IconButton
@@ -84,22 +90,17 @@ const FileUpload = (props) => {
             </IconButton>
           </label>
           <TextField
-              id="standard-basic"
-              label="kép leírás"
-              variant="standard"
-              onChange={(e) => setAlt(e.target.value)}
-              value={alt}
-            />
+            id="standard-basic"
+            label="kép leírás"
+            variant="standard"
+            onChange={(e) => setAlt(e.target.value)}
+            value={alt}
+          />
         </Stack>
         <Button variant="outlined" type="submit" value="Feltölt">
           Feltölt
         </Button>
-      </form>
-      <div>
-        {/* {fileUpload && (
-        )} */}
-        {/* <img width="100" height="100" src="http://localhost:5555/static/profil.png" alt="" /> */}
-      </div>
+      </Box>
     </>
   );
 };

@@ -31,6 +31,8 @@ model upload_images {
 
 model user_config {
   id        Int     @id @default(autoincrement())
-  title     String? @db.VarChar(45)
-  sub_title String? @db.VarChar(45)
+  name     String? @db.VarChar(45)
+  desc String? @db.VarChar(45)
+  img_alt  String? @db.VarChar(45)
+  img_name String? @db.VarChar(45)
 }

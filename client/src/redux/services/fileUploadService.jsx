@@ -1,11 +1,11 @@
 import apiClient from "../../api/apiClient";
 
-const fileUploadService = () => {
-  const fileUpload = (formData) => apiClient().post("/createFileUpload", formData);
+const service = () => {
+  const createData = (data) => apiClient().post("/createFileUpload", data);
 
   return {
-    fileUpload,
+    createData,
   };
 };
 
-export default fileUploadService;
+export default service;
