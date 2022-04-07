@@ -1,6 +1,6 @@
 import React from "react";
 import "./sidebar.css";
-import SidebarProfile from "./sidebarProfile/SidebarProfile";
+import SidebarProfile from "./sidebarProfile/SidebarProfile.jsx";
 import Navbar from "./navbar/Navbar";
 import Logo from "./logo/Logo";
 

@@ -17,6 +17,7 @@ const FileUpload = () => {
   const [file, setFile] = useState("");
   const [filename, setFilename] = useState("");
   const [alt, setAlt] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [uploadFile, setUploadFile] = useState({});
 
   useEffect(() => {

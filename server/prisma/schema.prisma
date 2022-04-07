@@ -8,7 +8,9 @@ datasource db {
 }
 
 model account {
-  id Int @id @default(autoincrement())
+  id       Int     @id @default(autoincrement())
+  password String? @db.VarChar(45)
+  username String? @unique(map: "username") @db.VarChar(45)
 }
 
 model header_config {
@@ -30,9 +32,9 @@ model upload_images {
 }
 
 model user_config {
-  id        Int     @id @default(autoincrement())
-  name     String? @db.VarChar(45)
-  desc String? @db.VarChar(45)
+  id       Int     @id @default(autoincrement())
   img_alt  String? @db.VarChar(45)
   img_name String? @db.VarChar(45)
+  desc     String? @db.VarChar(45)
+  name     String? @db.VarChar(45)
 }

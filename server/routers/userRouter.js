@@ -82,15 +82,6 @@ router.put("/updateUser/:id", images.single("profileImg"), async (req, res) => {
     },
   });
 
-  // if (
-  //   name === doesntChange[0].name &&
-  //   desc === doesntChange[0].desc &&
-  //   alt === doesntChange[0].img_alt &&
-  //   req.file.filename === doesntChange[0].img_name
-  // ) {
-  //   res.send({ error_message: "Felhasználó nem módosult!" });
-  // } else {
-
   if (req.file !== undefined) {
     let fileType = req.file.mimetype.split("/")[1];
 
@@ -110,7 +101,6 @@ router.put("/updateUser/:id", images.single("profileImg"), async (req, res) => {
           where: { id: id },
           data: { img_name: newFileName },
         });
-      //  return res.send({ success_message: "kép létrehozva!" });
       }
     );
   }
@@ -120,7 +110,6 @@ router.put("/updateUser/:id", images.single("profileImg"), async (req, res) => {
     data: { name, desc, img_alt: alt },
   });
   res.send({ success_message: "Felhasználó módosítva!" });
-  // }
 });
 
 router.put("/deleteUser/:id", async (req, res) => {

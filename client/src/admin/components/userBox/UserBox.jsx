@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, IconButton, Stack, styled, TextField } from "@mui/material";
+import { Box, IconButton, Stack, styled } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadGetData,
@@ -226,7 +226,7 @@ const UserBox = () => {
               {item.img_name ? (
                 <div>
                   <img
-                    width="100"
+                    width="200"
                     src={`http://localhost:5555/static/images/profile-img/${item.img_name}`}
                     alt=""
                   />
