@@ -9,11 +9,22 @@ router.get("/getHeader", async (req, res) => {
       sub_title: true,
     },
   });
-  res.status(200).send(getHeaderData);
+  res.status(200).send(getHeaderData[0]);
 });
 
 router.post("/createHeader", async (req, res) => {
   const { title, subTitle } = req.body;
+
+  const headerExists = await header_config.findUnique({
+    where: {
+      id: 1,
+    },
+  });
+
+  if (headerExists) {
+    return res.send({ error_message: "A header létezik!" });
+  }
+
   if (!title && !subTitle) {
     res.send({ error_message: "Az egyik mező kitöltése kötelező!" });
   } else {

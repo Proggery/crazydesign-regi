@@ -3,6 +3,7 @@ const initialState = () => {
     user: null,
     isSuccess: false,
     getData: {},
+    error: {},
     message: {},
   };
 };

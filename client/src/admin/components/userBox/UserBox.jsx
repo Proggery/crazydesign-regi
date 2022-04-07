@@ -9,7 +9,6 @@ import {
 } from "../../../redux/user/reducers/thunks";
 import TextInput from "../../../components/htmlElements/inputs/TextInput";
 import SendButton from "../../../components/htmlElements/buttons/SendButton";
-import { showDefValue } from "../../../components/htmlElements/inputs/properties";
 import { Delete, PhotoCamera } from "@mui/icons-material";
 
 const Input = styled("input")({
@@ -281,7 +280,6 @@ const UserBox = () => {
               <TextInput defaultValue={name} {...nameInputProps} />
 
               <TextInput
-                showDefValue={showDefValue}
                 defaultValue={desc}
                 {...descInputProps}
               />

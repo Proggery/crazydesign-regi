@@ -4,23 +4,23 @@ import initialState from "./initialState";
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
 
-    case actionType.LOGIN_GETDATA:
+    case actionType.GET_DATA:
       return {
         ...state,
         isSuccess: true,
         getData: payload,
       };
-    case actionType.LOGIN_SUCCESS:
+    case actionType.CREATE_DATA:
       return {
         ...state,
         isSuccess: true,
         user: payload,
       };
-    case actionType.LOGIN_UPDATE:
+    case actionType.UPDATE_DATA:
       return {
         ...state,
       };
-    case actionType.LOGIN_ERROR:
+    case actionType.ERROR:
       return {
         ...state,
         isSuccess: false,

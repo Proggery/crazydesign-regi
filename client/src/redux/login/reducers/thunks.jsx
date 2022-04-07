@@ -5,15 +5,7 @@ export const loadgetData = (id) => (dispatch) => {
   DataService()
     .getData(id)
     .then((res) => {
-      dispatch(actions.loginGetData(res.data));
-      // if (res.data.user) {
-      //   localStorage.setItem("success", true);
-      //   localStorage.setItem("id", res.data.user.id);
-      // } else {
-      //   dispatch(actions.loginError());
-      //   localStorage.setItem("success", false);
-      // }
-      // dispatch(actions.message(res.data.msg));
+      dispatch(actions.getData(res.data));
     })
     .catch((err) => {
       console.log(err);
@@ -25,11 +17,11 @@ export const loadCreateData = (data) => (dispatch) => {
     .createData(data)
     .then((res) => {
       if (res.data.user) {
-        dispatch(actions.loginSuccess());
+        dispatch(actions.createData());
         localStorage.setItem("success", true);
         localStorage.setItem("id", res.data.user.id);
       } else {
-        dispatch(actions.loginError());
+        dispatch(actions.error());
         localStorage.setItem("success", false);
       }
       dispatch(actions.message(res.data.msg));
@@ -44,14 +36,6 @@ export const loadUpdateData = (data, id) => (dispatch) => {
     .updateData(data, id)
     .then((res) => {
       console.log(res);
-      // if (res.data.user) {
-      //   dispatch(actions.loginSuccess());
-      //   localStorage.setItem("success", true);
-      // } else {
-      //   dispatch(actions.loginError());
-      //   localStorage.setItem("success", false);
-      // }
-      // dispatch(actions.message(res.data.msg));
     })
     .catch((err) => {
       console.log(err);

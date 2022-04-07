@@ -17,14 +17,14 @@ const UpdateLogin = () => {
     password: "",
   });
 
-  const { username } = data;
+  const { username, password } = data;
 
   const userID = localStorage.getItem("id");
 
   useEffect(() => {
     dispatch(loadgetData(userID));
   }, []);
-  
+
   useEffect(() => {
     if (getData) {
       setData({
@@ -42,9 +42,11 @@ const UpdateLogin = () => {
   const handleUpdate = (e, id) => {
     e.preventDefault();
 
-    console.log(id);
-    console.log(data);
     dispatch(loadUpdateData(data, id));
+    setData({
+      ...data,
+      password: "",
+    });
   };
 
   const usernameProps = {
@@ -82,7 +84,7 @@ const UpdateLogin = () => {
 
       <div className="configBox__content">
         <TextInput value={username} {...usernameProps} />
-        <TextInput {...passwordProps} />
+        <TextInput value={password} {...passwordProps} />
         <SendButton {...updateButtonProps} />
       </div>
     </Box>

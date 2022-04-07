@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "./css/admin.css";
 import { styled, Paper, Box, Container, Button } from "@mui/material";
@@ -25,8 +24,6 @@ const Admin = () => {
     localStorage.removeItem("success");
     history.go();
   };
-
-  console.log(message);
 
   return (
     <Container id="admin" sx={{ mt: 8 }}>

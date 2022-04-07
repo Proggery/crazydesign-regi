@@ -17,7 +17,6 @@ import {
   socialUpdateIconProps,
   submitButtonProps,
 } from "./properties";
-// import { inputEmptyError } from "../../../components/htmlElements/inputs/properties";
 
 const HeaderBox = () => {
   const dispatch = useDispatch();

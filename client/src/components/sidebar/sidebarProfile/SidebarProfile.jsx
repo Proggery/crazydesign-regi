@@ -25,15 +25,14 @@ export default function SidebarProfile() {
     <div className="sidebar__profile">
       {getData &&
         getData.map((item) => (
-          <>
-            {console.log(item.img_name)}
+          <div key={item.id}>
             <img
               src={`http://localhost:5555/static/images/profile-img/${item.img_name}`}
               alt=""
             />
             <h3>{item.name}</h3>
             <p>{item.desc}</p>
-          </>
+          </div>
         ))}
     </div>
   );

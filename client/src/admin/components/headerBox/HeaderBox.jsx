@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import Box from "@mui/material/Box";
+import { Box, Button, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadGetData,
   loadCreateData,
   loadUpdateData,
 } from "../../../redux/header/reducers/thunks";
-import TextInput from "../../../components/htmlElements/inputs/TextInput";
-import SendButton from "../../../components/htmlElements/buttons/SendButton";
-import { showDefValue } from "../../../components/htmlElements/inputs/properties";
+import {
+  titleProps,
+  subTitleProps,
+  submitBtnProps,
+  updateBtnProps,
+} from "./properties";
 
 const HeaderBox = () => {
   const dispatch = useDispatch();
@@ -18,10 +21,7 @@ const HeaderBox = () => {
     title: "",
     subTitle: "",
   });
-  const [inputChange, setInputChange] = useState(true);
-
   const [resMessage, setResMessage] = useState({});
-
   const { title, subTitle } = data;
 
   useEffect(() => {
@@ -30,19 +30,13 @@ const HeaderBox = () => {
 
   useEffect(() => {
     if (getData) {
-      if (getData[0]) {
-        setInputChange(false);
-
-        setData({
-          ...data,
-          title: getData[0].title,
-          subTitle: getData[0].sub_title,
-        });
-      }
-    } else {
-      setInputChange(true);
+      setData({
+        ...data,
+        title: getData.title,
+        subTitle: getData.sub_title,
+      });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    //   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getData]);
 
   useEffect(() => {
@@ -59,32 +53,8 @@ const HeaderBox = () => {
     dispatch(loadGetData());
   };
 
-  const handleUpdate = (e, id) => {
-    e.preventDefault();
+  const handleUpdate = (id) => {
     dispatch(loadUpdateData(data, id));
-  };
-
-  const titleInputProps = {
-    label: "Név",
-    name: "title",
-    onChange: handleChange,
-    variant: "standard",
-  };
-
-  const subTitleInputProps = {
-    ...titleInputProps,
-    name: "subTitle",
-    label: "Alszöveg",
-  };
-  const submitButtonProps = {
-    value: "Létrehoz",
-    onClick: handleSubmit,
-    variant: "contained",
-  };
-  const updateButtonProps = {
-    value: "Módosít",
-    onClick: (e) => handleUpdate(e, 1),
-    variant: "contained",
   };
 
   return (
@@ -109,26 +79,30 @@ const HeaderBox = () => {
         <div className="configBox__message"></div>
       )}
 
-      {inputChange ? (
+      {!getData ? (
         <div className="configBox__content">
-          <TextInput {...titleInputProps} />
-          <TextInput {...subTitleInputProps} />
-          <SendButton {...submitButtonProps} />
+          <TextField value={title} onChange={handleChange} {...titleProps} />
+          <TextField
+            value={subTitle}
+            onChange={handleChange}
+            {...subTitleProps}
+          />
+          <Button onClick={handleSubmit} {...submitBtnProps}>
+            {submitBtnProps.value}
+          </Button>
         </div>
       ) : (
-        getData &&
-        getData.map((item, key) => (
-          <div className="configBox__content" key={key}>
-            <TextInput defaultValue={title} {...titleInputProps} />
-
-            <TextInput
-              showDefValue={showDefValue}
-              defaultValue={subTitle}
-              {...subTitleInputProps}
-            />
-            <SendButton {...updateButtonProps} />
-          </div>
-        ))
+        <div className="configBox__content">
+          <TextField onChange={handleChange} value={title} {...titleProps} />
+          <TextField
+            onChange={handleChange}
+            value={subTitle}
+            {...subTitleProps}
+          />
+          <Button onClick={() => handleUpdate(1)} {...updateBtnProps}>
+            {updateBtnProps.value}
+          </Button>
+        </div>
       )}
     </Box>
   );
