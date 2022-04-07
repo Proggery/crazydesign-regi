@@ -23,17 +23,16 @@ export default function SidebarProfile() {
   // };
   return (
     <div className="sidebar__profile">
-      {getData &&
-        getData.map((item) => (
-          <div key={item.id}>
-            <img
-              src={`http://localhost:5555/static/images/profile-img/${item.img_name}`}
-              alt=""
-            />
-            <h3>{item.name}</h3>
-            <p>{item.desc}</p>
-          </div>
-        ))}
+      <div>
+        <img
+          src={`http://localhost:5555/static/images/profile-img/${
+            getData && getData.img_name
+          }`}
+          alt=""
+        />
+        <h3>{getData && getData.name}</h3>
+        <p>{getData && getData.desc}</p>
+      </div>
     </div>
   );
 }

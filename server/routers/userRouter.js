@@ -73,8 +73,6 @@ router.put("/updateUser/:id", images.single("profileImg"), async (req, res) => {
   const id = parseInt(req.params.id);
   let { name, desc, alt } = req.body;
 
-  console.log(name, desc);
-
   const doesntChange = await user_config.findMany({
     where: { id },
     select: {
@@ -85,27 +83,24 @@ router.put("/updateUser/:id", images.single("profileImg"), async (req, res) => {
     },
   });
 
-  console.log(doesntChange)
-
   if (name === doesntChange[0].name && desc === doesntChange[0].desc) {
     return res.send({ error_msg: "A felhasználó nem módosult!" });
   } else {
-
     if (req.file !== undefined) {
       let fileType = req.file.mimetype.split("/")[1];
-  
+
       if (fileType === "svg+xml") {
         fileType = fileType.split("+")[0];
       }
-  
+
       let newFileName = req.file.filename + "." + fileType;
-  
+
       rename(
         `uploads/images/profile-img/${req.file.filename}`,
         `uploads/images/profile-img/${newFileName}`,
         async (err) => {
           if (err) throw err;
-  
+
           await user_config.update({
             where: { id: id },
             data: { img_name: newFileName },
@@ -113,14 +108,13 @@ router.put("/updateUser/:id", images.single("profileImg"), async (req, res) => {
         }
       );
     }
-  
+
     await user_config.update({
       where: { id: id },
       data: { name, desc, img_alt: alt },
     });
     res.send({ success_msg: "Felhasználó módosítva!" });
   }
-
 });
 
 router.put("/deleteUser/:id", async (req, res) => {

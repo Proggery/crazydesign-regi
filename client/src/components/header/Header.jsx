@@ -7,7 +7,7 @@ import { loadGetData } from "../../redux/header/reducers/thunks";
 
 export default function Header() {
   const dispatch = useDispatch();
-  const {getData } = useSelector((state) => state.header);
+  const { getData } = useSelector((state) => state.header);
 
   useEffect(() => {
     dispatch(loadGetData());
@@ -16,13 +16,10 @@ export default function Header() {
   return (
     <section className="header" id="header">
       <div className="content">
-        {getData &&
-          getData.map((data, key) => (
-            <div key={key}>
-              <h3>{data.title}</h3>
-              <h4>{data.sub_title}</h4>
-            </div>
-          ))}
+        <div>
+          <h3>{getData && getData.title}</h3>
+          <h4>{getData && getData.sub_title}</h4>
+        </div>
         <Link to="portfolio" className="btn">
           elkészített projektek
         </Link>
