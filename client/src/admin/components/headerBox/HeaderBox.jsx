@@ -73,7 +73,7 @@ const HeaderBox = () => {
 
       {resMessage && resMessage ? (
         <div className="configBox__message">
-          {resMessage.error_message || resMessage.success_message}
+          {resMessage.error_msg || resMessage.success_msg}
         </div>
       ) : (
         <div className="configBox__message"></div>
@@ -99,7 +99,7 @@ const HeaderBox = () => {
             value={subTitle}
             {...subTitleProps}
           />
-          <Button onClick={() => handleUpdate(1)} {...updateBtnProps}>
+          <Button onClick={() => handleUpdate(getData.id)} {...updateBtnProps}>
             {updateBtnProps.value}
           </Button>
         </div>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Button, TextField } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { loadCreateData } from "../../../redux/login/reducers/thunks";
+import { usernameProps, passwordProps, submitBtnProps } from "./properties";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -42,21 +43,15 @@ const Login = () => {
         <h1>Login: 🤓</h1>
         <TextField
           onChange={handleChange}
-          name="username"
-          label="Felhasználónév"
-          variant="standard"
           value={user.username}
+          {...usernameProps}
         />
         <TextField
           onChange={handleChange}
-          name="password"
-          label="Jelszó"
-          variant="standard"
           value={user.password}
+          {...passwordProps}
         />
-        <Button type="submit" variant="outlined">
-          Bejelentkezés
-        </Button>
+        <Button {...submitBtnProps}>{submitBtnProps.value}</Button>
       </Box>
     </>
   );

@@ -19,7 +19,7 @@ export const loadCreateData = (data) => (dispatch) => {
     .createData(data)
     .then((res) => {
 
-      if (res.error_message) {
+      if (res.error_msg) {
         dispatch(actions.message(res.data));
       } else {
         dispatch(actions.message(res.data));
@@ -39,7 +39,7 @@ export const loadUpdateData = (data, id) => (dispatch) => {
     .updateData(data, id)
     .then((res) => {
 
-      if (res.error_message) {
+      if (res.error_msg) {
         dispatch(actions.message(res.data));
       } else {
         dispatch(actions.message(res.data));

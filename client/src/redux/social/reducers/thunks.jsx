@@ -18,7 +18,7 @@ export const loadCreateData = (data) => (dispatch) => {
   DataService()
     .createData(data)
     .then((res) => {
-      if (res.data.error_message) {
+      if (res.data.error_msg) {
         dispatch(actions.message(res.data));
       } else {
         dispatch(actions.message(res.data));
@@ -59,7 +59,6 @@ export const loadDeleteData = (id) => (dispatch) => {
   DataService()
     .deleteData(id)
     .then((res) => {
-      console.log("sikeres törlés");
       if (res.data.success_message) {
         dispatch(actions.message(res.data));
       }

@@ -5,6 +5,7 @@ const { header_config } = new PrismaClient();
 router.get("/getHeader", async (req, res) => {
   const getHeaderData = await header_config.findMany({
     select: {
+      id: true,
       title: true,
       sub_title: true,
     },
@@ -22,11 +23,11 @@ router.post("/createHeader", async (req, res) => {
   });
 
   if (headerExists) {
-    return res.send({ error_message: "A header létezik!" });
+    return res.send({ error_msg: "A header létezik!" });
   }
 
   if (!title && !subTitle) {
-    res.send({ error_message: "Az egyik mező kitöltése kötelező!" });
+    res.send({ error_msg: "Az egyik mező kitöltése kötelező!" });
   } else {
     await header_config.create({
       data: {
@@ -35,7 +36,7 @@ router.post("/createHeader", async (req, res) => {
       },
     });
 
-    res.send({ success_message: "Fejléc létrehozva!" });
+    res.send({ success_msg: "Fejléc létrehozva!" });
   }
 });
 
@@ -54,13 +55,13 @@ router.put("/updateHeader/:id", async (req, res) => {
     title === doesntChange[0].title &&
     subTitle === doesntChange[0].sub_title
   ) {
-    res.send({ error_message: "Fejléc nem módosult!" });
+    res.send({ error_msg: "Fejléc nem módosult!" });
   } else {
     await header_config.update({
       where: { id: id },
       data: { title: title, sub_title: subTitle },
     });
-    res.send({ success_message: "Fejléc módosítva!" });
+    res.send({ success_msg: "Fejléc módosítva!" });
   }
 });
 

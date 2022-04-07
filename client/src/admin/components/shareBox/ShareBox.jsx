@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./shareBox.css";
 import { Edit, Delete, Check } from "@mui/icons-material";
-import { Popover, Typography, Box } from "@mui/material";
+import { Popover, Typography, Box, TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadGetData,
@@ -9,22 +9,21 @@ import {
   loadUpdateData,
   loadDeleteData,
 } from "../../../redux/social/reducers/thunks";
-import TextInput from "../../../components/htmlElements/inputs/TextInput";
-import {
-  socialCreatePathProps,
-  socialCreateClassProps,
-  socialUpdatePathProps,
-  socialUpdateIconProps,
-  submitButtonProps,
-} from "./properties";
+import { pathProps, classProps, submitBtnProps } from "./properties";
 
 const HeaderBox = () => {
   const dispatch = useDispatch();
   const { getData, message } = useSelector((state) => state.social);
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    socialPath: "",
+    socialClass: "",
+  });
   const [updateData, setUpdateData] = useState({});
   const [resMessage, setResMessage] = useState({});
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const { socialPath, socialClass } = data;
 
   useEffect(() => {
     dispatch(loadGetData());
@@ -54,10 +53,7 @@ const HeaderBox = () => {
 
   const handleSubmit = () => {
     dispatch(loadCreateData(data));
-    setData({ ...data, socialPath: "" });
-
-    document.getElementById("socialCreatePathProps").value = "";
-    document.getElementById("socialCreateClassProps").value = "";
+    setData({ ...data, socialPath: "", socialClass: "" });
   };
 
   const handleUpdate = (id) => {
@@ -69,8 +65,7 @@ const HeaderBox = () => {
     dispatch(loadDeleteData(id));
   };
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
+  // POPUP (buborék) ablak
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -95,9 +90,10 @@ const HeaderBox = () => {
       <div className="configBox__header">
         <h2>Social média beállítás</h2>
       </div>
+
       {resMessage && resMessage ? (
         <div className="configBox__message">
-          {resMessage.error_message || resMessage.success_message}
+          {resMessage.error_msg || resMessage.success_msg}
         </div>
       ) : (
         <div className="configBox__message"></div>
@@ -105,15 +101,15 @@ const HeaderBox = () => {
 
       {getData && getData.length < 5 ? (
         <Box className="configBox__content">
-          <TextInput
-            // defaultValue=""
+          <TextField
+            value={socialPath}
             onChange={handleChange}
-            {...socialCreatePathProps}
+            {...pathProps}
           />
-          <TextInput
-            // defaultValue=""
+          <TextField
+            value={socialClass}
             onChange={handleChange}
-            {...socialCreateClassProps}
+            {...classProps}
           />
           <Box
             sx={{
@@ -123,7 +119,7 @@ const HeaderBox = () => {
             }}
             className="submit__button"
           >
-            <Check onClick={handleSubmit} {...submitButtonProps} />
+            <Check onClick={handleSubmit} {...submitBtnProps} />
           </Box>
         </Box>
       ) : (
@@ -133,10 +129,10 @@ const HeaderBox = () => {
       {getData &&
         getData.map((item) => (
           <Box key={item.id} className="configBox__content">
-            <TextInput
+            <TextField
               onChange={handleUpdateChange}
-              defaultValue={item.path}
-              {...socialUpdatePathProps}
+              value={item.path}
+              {...pathProps}
             />
             <div
               aria-owns={open ? "mouse-over-popover" : undefined}
@@ -144,10 +140,10 @@ const HeaderBox = () => {
               onMouseEnter={handlePopoverOpen}
               onMouseLeave={handlePopoverClose}
             >
-              <TextInput
+              <TextField
                 onChange={handleUpdateChange}
-                defaultValue={item.class_name}
-                {...socialUpdateIconProps}
+                value={item.class_name}
+                {...classProps}
                 disabled
               />
             </div>
@@ -188,9 +184,7 @@ const HeaderBox = () => {
               <Delete
                 className="delete__button"
                 onClick={() => handleDelete(item.id)}
-              >
-                T
-              </Delete>
+              ></Delete>
             </Box>
           </Box>
         ))}

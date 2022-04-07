@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Box from "@mui/material/Box";
+import { Button, Box } from "@mui/material";
 import TextInput from "../../../components/htmlElements/inputs/TextInput";
-import SendButton from "../../../components/htmlElements/buttons/SendButton";
 import {
-  loadgetData,
+  loadGetData,
   loadUpdateData,
 } from "../../../redux/login/reducers/thunks";
+import { usernameProps, passwordProps, submitBtnProps } from "./properties";
 
-const UpdateLogin = () => {
+const Account = () => {
   const dispatch = useDispatch();
   const { getData, message } = useSelector((state) => state.login);
 
@@ -16,14 +16,15 @@ const UpdateLogin = () => {
     username: "",
     password: "",
   });
+  const [resMessage, setResMessage] = useState({});
 
   const { username, password } = data;
 
   const userID = localStorage.getItem("id");
 
   useEffect(() => {
-    dispatch(loadgetData(userID));
-  }, []);
+    dispatch(loadGetData(userID));
+  }, [userID]);
 
   useEffect(() => {
     if (getData) {
@@ -34,38 +35,21 @@ const UpdateLogin = () => {
     }
   }, [getData]);
 
+  useEffect(() => {
+    setResMessage(message);
+  }, [message]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
 
-  const handleUpdate = (e, id) => {
-    e.preventDefault();
-
+  const handleUpdate = (id) => {
     dispatch(loadUpdateData(data, id));
     setData({
       ...data,
       password: "",
     });
-  };
-
-  const usernameProps = {
-    label: "Felhasználónév",
-    name: "username",
-    onChange: handleChange,
-    variant: "standard",
-  };
-
-  const passwordProps = {
-    ...usernameProps,
-    name: "password",
-    label: "Jelszó",
-  };
-
-  const updateButtonProps = {
-    value: "Módosít",
-    onClick: (e) => handleUpdate(e, userID),
-    variant: "contained",
   };
 
   return (
@@ -82,13 +66,31 @@ const UpdateLogin = () => {
         <h2>Felhasználónév és jelszó módosítás</h2>
       </div>
 
+      {resMessage && resMessage ? (
+        <div className="configBox__message">
+          {resMessage.error_msg || resMessage.success_msg}
+        </div>
+      ) : (
+        <div className="configBox__message"></div>
+      )}
+
       <div className="configBox__content">
-        <TextInput value={username} {...usernameProps} />
-        <TextInput value={password} {...passwordProps} />
-        <SendButton {...updateButtonProps} />
+        <TextInput
+          onChange={handleChange}
+          value={username}
+          {...usernameProps}
+        />
+        <TextInput
+          onChange={handleChange}
+          value={password}
+          {...passwordProps}
+        />
+        <Button onClick={() => handleUpdate(userID)} {...submitBtnProps}>
+          {submitBtnProps.value}
+        </Button>
       </div>
     </Box>
   );
 };
 
-export default UpdateLogin;
+export default Account;

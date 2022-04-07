@@ -2,13 +2,11 @@ const router = require("express").Router();
 const { PrismaClient } = require("@prisma/client");
 const { account } = new PrismaClient();
 
-router.get("/getLogin/:id", async (req, res) => {
-  const id = parseInt(req.params.id);
-
-
+router.get("/getLogin", async (req, res) => {
   const user = await account.findUnique({
-    where: { id },
+    where: { id: 1 },
     select: {
+      id: true,
       username: true,
     },
   });
@@ -30,25 +28,22 @@ router.post("/createLogin", async (req, res) => {
   });
 
   if (!userExists || password !== userExists.password) {
-    return res.send({ error_message: "Hibás felhasználónév vagy jelszó!" });
+    return res.send({ error_msg: "Hibás felhasználónév vagy jelszó!" });
   }
 
-  res.send({ success_message: "Felhasználó létezik!", user: userExists });
+  res.send({ success_msg: "Felhasználó létezik!", user: userExists });
 });
 
 router.put("/updateLogin/:id", async (req, res) => {
   const id = parseInt(req.params.id);
   let { username, password } = req.body;
 
-  console.log(id);
-  console.log(req.body);
-
   if (username && password) {
     await account.update({
       where: { id: id },
       data: { username, password },
     });
-    res.send({ success_message: "Felhasználónév és jelszó módosítva!" });
+    res.send({ success_msg: "Adatok módosítva!" });
   }
 });
 

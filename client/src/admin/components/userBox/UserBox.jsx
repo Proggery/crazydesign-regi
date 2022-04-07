@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Box, IconButton, Stack, styled } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Stack,
+  styled,
+  TextField,
+} from "@mui/material";
+import { Delete, PhotoCamera } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadGetData,
   loadCreateData,
   loadUpdateData,
-  loadDeleteData
+  loadDeleteData,
 } from "../../../redux/user/reducers/thunks";
-import TextInput from "../../../components/htmlElements/inputs/TextInput";
-import SendButton from "../../../components/htmlElements/buttons/SendButton";
-import { Delete, PhotoCamera } from "@mui/icons-material";
+import {
+  nameProps,
+  descProps,
+  altProps,
+  submitBtnProps,
+  updateBtnProps,
+} from "./properties";
 
 const Input = styled("input")({
   display: "none",
@@ -26,7 +38,6 @@ const UserBox = () => {
     file: "",
     filename: "",
   });
-  const [inputChange, setInputChange] = useState(true);
   const [resMessage, setResMessage] = useState({});
   const { name, desc, alt } = data;
 
@@ -36,18 +47,13 @@ const UserBox = () => {
 
   useEffect(() => {
     if (getData) {
-      if (getData[0]) {
-        setInputChange(false);
-
-        setData({
-          ...data,
-          name: getData[0].name,
-          desc: getData[0].desc,
-        });
-      }
-    } else {
-      setInputChange(true);
+      setData({
+        ...data,
+        name: getData.name,
+        desc: getData.desc,
+      });
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getData]);
 
@@ -92,9 +98,7 @@ const UserBox = () => {
     });
   };
 
-  const handleUpdate = (e, id) => {
-    e.preventDefault();
-
+  const handleUpdate = (id) => {
     const formData = new FormData();
     formData.append("profileImg", data.file);
     formData.append("name", name);
@@ -120,34 +124,6 @@ const UserBox = () => {
 
   const deleteProfileImg = (id) => {
     dispatch(loadDeleteData(id));
-  }
-
-  const nameInputProps = {
-    label: "Név",
-    name: "name",
-    onChange: handleChange,
-    variant: "standard",
-  };
-
-  const descInputProps = {
-    ...nameInputProps,
-    name: "desc",
-    label: "Alszöveg",
-  };
-  const altInputProps = {
-    ...nameInputProps,
-    name: "alt",
-    label: "kép leírás",
-  };
-  const submitButtonProps = {
-    value: "Létrehoz",
-    variant: "contained",
-    type: "submit",
-  };
-  const updateButtonProps = {
-    value: "Módosít",
-    onClick: (e) => handleUpdate(e, 1),
-    variant: "contained",
   };
 
   return (
@@ -158,11 +134,12 @@ const UserBox = () => {
 
       {resMessage && resMessage ? (
         <div className="configBox__message">
-          {resMessage.error_message || resMessage.success_message}
+          {resMessage.error_msg || resMessage.success_msg}
         </div>
       ) : (
         <div className="configBox__message"></div>
       )}
+
       <Box
         sx={{
           "& > :not(style)": { m: 1 },
@@ -171,7 +148,7 @@ const UserBox = () => {
         autoComplete="off"
         className="configBox"
       >
-        {inputChange ? (
+        {!getData ? (
           <div className="configBox__content">
             <Box
               component="form"
@@ -211,81 +188,87 @@ const UserBox = () => {
                     <PhotoCamera />
                   </IconButton>
                 </label>
-                <TextInput {...altInputProps} />
+                <TextField onChange={handleChange} {...altProps} />
               </Stack>
-              <TextInput {...nameInputProps} />
-              <TextInput {...descInputProps} />
-              <SendButton {...submitButtonProps} />
+              <TextField onChange={handleChange} {...nameProps} />
+              <TextField onChange={handleChange} {...descProps} />
+              <Button {...submitBtnProps} >
+                {submitBtnProps.value}
+              </Button>
             </Box>
           </div>
         ) : (
-          getData &&
-          getData.map((item) => (
-            <div className="configBox__content" key={item.id}>
-              {item.img_name ? (
-                <div>
-                  <img
-                    width="200"
-                    src={`http://localhost:5555/static/images/profile-img/${item.img_name}`}
-                    alt=""
-                  />
+          <div className="configBox__content" key={getData.id}>
+            {getData.img_name ? (
+              <div>
+                <img
+                  width="200"
+                  src={`http://localhost:5555/static/images/profile-img/${getData.img_name}`}
+                  alt=""
+                />
 
-                  <IconButton
-                    color="primary"
-                    aria-label="delete picture"
-                    component="span"
-                    onClick={()=>deleteProfileImg(item.id)}
-                  >
-                    <Delete />
-                  </IconButton>
-                </div>
-              ) : (
-                <>
-                  <Stack direction="row" alignItems="center" spacing={2}>
-                    {data.filename && (
-                      <div>
-                        {data.filename}
-                        <IconButton
-                          color="primary"
-                          aria-label="delete picture"
-                          component="span"
-                          onClick={deleteFileName}
-                        >
-                          <Delete />
-                        </IconButton>
-                      </div>
-                    )}
-                  </Stack>
-                  <Stack direction="row" alignItems="center" spacing={2}>
-                    <label htmlFor="profile__img">
-                      <Input
-                        onChange={handleFileUpload}
-                        accept="image/*"
-                        id="profile__img"
-                        type="file"
-                      />
+                <IconButton
+                  color="primary"
+                  aria-label="delete picture"
+                  component="span"
+                  onClick={() => deleteProfileImg(getData.id)}
+                >
+                  <Delete />
+                </IconButton>
+              </div>
+            ) : (
+              <>
+                <Stack direction="row" alignItems="center" spacing={2}>
+                  {data.filename && (
+                    <div>
+                      {data.filename}
                       <IconButton
                         color="primary"
-                        aria-label="upload picture"
+                        aria-label="delete picture"
                         component="span"
+                        onClick={deleteFileName}
                       >
-                        <PhotoCamera />
+                        <Delete />
                       </IconButton>
-                    </label>
-                    <TextInput {...altInputProps} />
-                  </Stack>
-                </>
-              )}
+                    </div>
+                  )}
+                </Stack>
+                <Stack direction="row" alignItems="center" spacing={2}>
+                  <label htmlFor="profile__img">
+                    <Input
+                      onChange={handleFileUpload}
+                      accept="image/*"
+                      id="profile__img"
+                      type="file"
+                    />
+                    <IconButton
+                      color="primary"
+                      aria-label="upload picture"
+                      component="span"
+                    >
+                      <PhotoCamera />
+                    </IconButton>
+                  </label>
+                  <TextField onChange={handleChange} {...altProps} />
+                </Stack>
+              </>
+            )}
 
-              <TextInput defaultValue={name} {...nameInputProps} />
+            <TextField
+              value={name}
+              onChange={handleChange}
+              {...nameProps}
+            />
 
-              <TextInput
-                defaultValue={desc}
-                {...descInputProps}
-              />
-              <SendButton {...updateButtonProps} />
-            </div>
-          ))
+            <TextField
+              value={desc}
+              onChange={handleChange}
+              {...descProps}
+            />
+            <Button onClick={() => handleUpdate(1)} {...updateBtnProps} >
+              {updateBtnProps.value}
+            </Button>
+          </div>
         )}
       </Box>
     </>

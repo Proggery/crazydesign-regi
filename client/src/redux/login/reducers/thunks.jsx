@@ -1,9 +1,11 @@
 import DataService from "../../services/loginService";
 import actions from "../actions/action";
 
-export const loadgetData = (id) => (dispatch) => {
+const messageTimer = 2800;
+
+export const loadGetData = () => (dispatch) => {
   DataService()
-    .getData(id)
+    .getData()
     .then((res) => {
       dispatch(actions.getData(res.data));
     })
@@ -17,14 +19,14 @@ export const loadCreateData = (data) => (dispatch) => {
     .createData(data)
     .then((res) => {
       if (res.data.user) {
-        dispatch(actions.createData());
         localStorage.setItem("success", true);
         localStorage.setItem("id", res.data.user.id);
       } else {
         dispatch(actions.error());
         localStorage.setItem("success", false);
+        dispatch(actions.message(res.data.error_msg));
       }
-      dispatch(actions.message(res.data.msg));
+      dispatch(loadGetData())
     })
     .catch((err) => {
       console.log(err);
@@ -35,7 +37,12 @@ export const loadUpdateData = (data, id) => (dispatch) => {
   DataService()
     .updateData(data, id)
     .then((res) => {
-      console.log(res);
+      dispatch(actions.message(res.data))
+
+      setTimeout(() => {
+        dispatch(actions.message({}));
+      }, messageTimer);
+
     })
     .catch((err) => {
       console.log(err);

@@ -18,7 +18,7 @@ export const loadCreateData = (data) => (dispatch) => {
   DataService()
     .createData(data)
     .then((res) => {
-      if (res.error_message) {
+      if (res.error_msg) {
         dispatch(actions.message(res.data));
       } else {
         dispatch(actions.message(res.data));
@@ -37,7 +37,7 @@ export const loadUpdateData = (data, id) => (dispatch) => {
   DataService()
     .updateData(data, id)
     .then((res) => {
-      if (res.error_message) {
+      if (res.error_msg) {
         dispatch(actions.message(res.data));
       } else {
         dispatch(actions.message(res.data));
@@ -57,7 +57,7 @@ export const loadDeleteData = (id) => (dispatch) => {
   DataService()
     .deleteData(id)
     .then((res) => {
-      if (res.error_message) {
+      if (res.error_msg) {
         dispatch(actions.message(res.data));
       } else {
         dispatch(actions.message(res.data));
