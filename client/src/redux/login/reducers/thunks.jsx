@@ -18,6 +18,7 @@ export const loadCreateData = (data) => (dispatch) => {
   DataService()
     .createData(data)
     .then((res) => {
+      console.log(res.data)
       if (res.data.user) {
         localStorage.setItem("success", true);
         localStorage.setItem("id", res.data.user.id);

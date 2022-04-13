@@ -57,6 +57,7 @@ const HeaderBox = () => {
   };
 
   const handleUpdate = (id) => {
+    console.log(updateData)
     dispatch(loadUpdateData(updateData, id));
     dispatch(loadGetData());
   };
